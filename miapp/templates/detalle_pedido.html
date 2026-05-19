@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Librízate - Detalle de Pedido</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#b2dce4",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#eedcd2",
+                        "tertiary-container": "#3a6269",
+                        "primary-container": "#795437",
+                        "secondary": "#695c54",
+                        "surface-variant": "#e3e2df",
+                        "surface-tint": "#7c5639",
+                        "primary": "#5e3d22",
+                        "surface-dim": "#dbdad6",
+                        "on-primary-fixed": "#2e1501",
+                        "surface-bright": "#faf9f5",
+                        "surface-container": "#efeeea",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f4f4f0",
+                        "outline-variant": "#d4c3b9",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#fdcba6",
+                        "surface": "#faf9f5",
+                        "secondary-fixed-dim": "#d4c3b9",
+                        "on-background": "#1b1c1a",
+                        "on-secondary-fixed": "#231a14",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "outline": "#82746c",
+                        "on-surface-variant": "#50453d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#ffdcc4",
+                        "on-tertiary-fixed": "#001f24",
+                        "primary-fixed-dim": "#eebd99",
+                        "on-secondary-fixed-variant": "#50443d",
+                        "surface-container-high": "#e9e8e4",
+                        "on-secondary-container": "#6d6058",
+                        "surface-container-highest": "#e3e2df",
+                        "tertiary-fixed": "#c0eaf2",
+                        "background": "#faf9f5",
+                        "inverse-primary": "#eebd99",
+                        "on-surface": "#1b1c1a",
+                        "on-tertiary-fixed-variant": "#244d53",
+                        "on-primary-fixed-variant": "#613f24",
+                        "tertiary-fixed-dim": "#a4ced5",
+                        "inverse-surface": "#2f312e",
+                        "tertiary": "#214a51",
+                        "secondary-fixed": "#f1dfd5",
+                        "inverse-on-surface": "#f2f1ed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar Implementation -->
+<header class="bg-[#faf9f5]/80 dark:bg-stone-900/80 backdrop-blur-md shadow-sm dark:shadow-none docked full-width top-0 z-50 sticky">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-bold tracking-tight text-[#5e3d22] dark:text-[#d4c3b9] font-['Noto_Serif']">
+                Librízate
+            </div>
+<div class="hidden md:flex items-center gap-8 font-['Noto_Serif'] text-lg font-medium">
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#795437] transition-colors" href="/inicio_sin_sesion/">Inicio</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#795437] transition-colors" href="/catalogo/">Catálogo</a>
+<a class="text-[#5e3d22] dark:text-white border-b-2 border-[#5e3d22] dark:border-[#d4c3b9] pb-1" href="/">Mis Pedidos</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#795437] transition-colors" href="/perfil/">Perfil</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#5e3d22] dark:text-stone-200 text-2xl hover:text-[#795437] transition-all" data-icon="menu_book">menu_book</button>
+</div>
+</nav>
+<div class="bg-stone-200/20 dark:bg-stone-800/20 h-[1px] w-full"></div>
+</header>
+<main class="max-w-7xl mx-auto px-8 py-12">
+<!-- Page Header & Action -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+<div>
+<nav class="flex items-center gap-2 text-xs uppercase tracking-widest text-secondary mb-4 font-label">
+<a class="hover:text-primary transition-colors" href="#">Archivo</a>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Mis Pedidos</a>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary font-bold">ORD-8829-2024</span>
+</nav>
+<h1 class="text-4xl md:text-5xl font-bold text-primary tracking-tight">Detalle del Pedido</h1>
+<p class="text-secondary mt-2 text-lg">Gestionado por el Archivista el 14 de Octubre, 2024</p>
+</div>
+<button class="group flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-md hover:bg-primary-container transition-all duration-300 shadow-sm">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="font-semibold uppercase tracking-wider text-sm">Exportar a PDF</span>
+</button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: The Book and Status -->
+<div class="lg:col-span-8 space-y-12">
+<!-- Status Bento Section -->
+<section class="bg-surface-container-low rounded-xl p-8 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl">history_edu</span>
+</div>
+<div class="flex-shrink-0 w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="inventory_2">inventory_2</span>
+</div>
+<div class="flex-grow">
+<div class="flex flex-wrap items-center gap-3 mb-2">
+<span class="bg-secondary-fixed-dim text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Estado Actual</span>
+<h2 class="text-2xl font-bold text-primary">En preparación</h2>
+</div>
+<p class="text-on-surface-variant max-w-md leading-relaxed">
+                            Tu ejemplar está siendo cuidadosamente seleccionado y encuadernado para su despacho. El Archivista está verificando la integridad de cada página.
+                        </p>
+</div>
+<div class="w-full md:w-auto text-right md:border-l border-outline-variant/30 md:pl-8">
+<p class="text-xs uppercase tracking-widest text-secondary font-label mb-1">Entrega Estimada</p>
+<p class="text-xl font-headline font-bold text-primary">22 de Octubre, 2024</p>
+</div>
+</section>
+<!-- Book Detail Card -->
+<section class="flex flex-col md:flex-row gap-10 items-start">
+<div class="w-full md:w-64 flex-shrink-0 shadow-2xl rounded-lg overflow-hidden transform md:-rotate-2 transition-transform hover:rotate-0 duration-500">
+<img alt="Portada de libro" class="w-full h-auto object-cover" data-alt="Classic vintage book cover with gold foil lettering on deep brown leather texture, elegant serif typography, soft museum lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEPssh1D39kUkDIC4TXYxgWyMAiqxAG9L6DG3sA231kf5E_8Nmcjg589SUbOhwDyvUCG455hQ5EuCr6vrZ3rQdSKruUZfX3ckmOrJ60JM3IlaKAh6zUPkracmHqD89Q9A3iuRvo73CYUThXs6cjcmFvyi7L1RQydaOxtSyjqK-HrEE9lC7KTDP-P3jN-AibmkSqpq-1UPA4ft5nbi15PMcFl4faerJ4X67uZEacSTdc28tpcJkraE2JKzuQOb74SKwR_FTSuN-gvA"/>
+</div>
+<div class="flex-grow pt-4">
+<span class="text-xs font-label uppercase tracking-[0.2em] text-secondary">Título de la Colección</span>
+<h3 class="text-3xl font-bold text-primary mt-1 mb-4 leading-tight">El Eco de los Siglos: Memorias de un Alquimista</h3>
+<p class="text-on-surface-variant leading-relaxed text-lg mb-6 italic">
+                            Una edición de lujo con grabados originales y pastas en cuero genuino de curtiembre orgánica.
+                        </p>
+<div class="grid grid-cols-2 gap-8 py-6 border-y border-outline-variant/20">
+<div>
+<p class="text-xs uppercase tracking-widest text-secondary mb-1">Autor</p>
+<p class="font-semibold text-primary">Julian Thorne</p>
+</div>
+<div>
+<p class="text-xs uppercase tracking-widest text-secondary mb-1">Edición</p>
+<p class="font-semibold text-primary">Coleccionista (Firmada)</p>
+</div>
+<div>
+<p class="text-xs uppercase tracking-widest text-secondary mb-1">ISBN</p>
+<p class="font-semibold text-primary">978-3-16-148410-0</p>
+</div>
+<div>
+<p class="text-xs uppercase tracking-widest text-secondary mb-1">Precio</p>
+<p class="font-semibold text-primary">45,00 €</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Archivist Comments -->
+<section class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="forum">forum</span>
+<h3 class="text-2xl font-bold text-primary">Comentarios del Archivista</h3>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-6 rounded-lg border-l-4 border-primary shadow-sm">
+<div class="flex justify-between items-center mb-3">
+<span class="font-bold text-primary">El Archivista Principal</span>
+<span class="text-xs text-secondary">Hoy, 09:45 AM</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                                "Hemos localizado el ejemplar con la firma original del autor en nuestra sección de reserva. La encuadernación se encuentra en perfecto estado. Procederemos con el sellado de lacre mañana por la mañana."
+                            </p>
+</div>
+<div class="bg-surface-container p-6 rounded-lg border-l-4 border-secondary-fixed-dim">
+<div class="flex justify-between items-center mb-3">
+<span class="font-bold text-primary text-opacity-80">Asistente del Gremio</span>
+<span class="text-xs text-secondary">Ayer, 16:20 PM</span>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                                "Pedido recibido y verificado en los registros. Iniciando búsqueda en la bóveda de colecciones especiales."
+                            </p>
+</div>
+</div>
+<div class="mt-8 pt-6">
+<label class="block text-xs uppercase tracking-widest text-secondary mb-3 font-label" for="user-note">Enviar nota al Archivista</label>
+<div class="flex gap-4">
+<input class="flex-grow bg-transparent border-b border-outline-variant focus:border-primary focus:ring-0 transition-all py-2 text-primary placeholder:text-stone-400" id="user-note" placeholder="Escribe tu mensaje aquí..." type="text"/>
+<button class="bg-primary text-on-primary px-6 py-2 rounded shadow-md hover:bg-primary-container transition-all font-label text-sm uppercase font-bold tracking-widest">Enviar</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Order Summary & Info -->
+<div class="lg:col-span-4 space-y-8">
+<aside class="bg-surface-container-high rounded-xl p-8 sticky top-28">
+<h3 class="text-xl font-bold text-primary mb-6 border-b border-outline-variant/30 pb-4">Resumen de Cuenta</h3>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between text-sm">
+<span class="text-secondary">Subtotal</span>
+<span class="text-primary font-medium">45,00 €</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-secondary">Gastos de Envío (Urgente)</span>
+<span class="text-primary font-medium">5,50 €</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-secondary">Impuestos del Gremio</span>
+<span class="text-primary font-medium">2,10 €</span>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex justify-between items-end">
+<span class="text-lg font-bold text-primary">Total</span>
+<span class="text-2xl font-headline font-bold text-primary">52,60 €</span>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<p class="text-xs uppercase tracking-widest text-secondary mb-2 font-label">Dirección de Entrega</p>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary text-sm">location_on</span>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                    Calle de la Ilustración, 42<br/>
+                                    Barrio de las Letras<br/>
+                                    28014 Madrid, España
+                                </p>
+</div>
+</div>
+<div>
+<p class="text-xs uppercase tracking-widest text-secondary mb-2 font-label">Método de Pago</p>
+<div class="flex items-center gap-3 bg-white/50 p-3 rounded">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+<span class="text-sm font-medium text-primary">Crédito del Archivista (•••• 4921)</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-10 py-4 border border-primary text-primary hover:bg-primary hover:text-on-primary transition-all duration-500 rounded font-label text-sm font-bold uppercase tracking-widest flex items-center justify-center gap-2 group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">support_agent</span>
+                        Contactar al Archivista
+                    </button>
+</aside>
+<div class="bg-[#d4c3b9]/20 p-6 rounded-xl border border-dashed border-[#d4c3b9]/50">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary" data-weight="fill">verified</span>
+<div>
+<p class="text-sm font-bold text-primary">Garantía de Autenticidad</p>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Este pedido incluye un certificado sellado por la Gran Biblioteca, garantizando el origen y estado del tomo.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Implementation -->
+<footer class="bg-[#faf9f5] dark:bg-stone-950 w-full py-12 mt-20 border-t border-stone-200 dark:border-stone-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto">
+<p class="font-['Manrope'] text-xs text-stone-500 dark:text-stone-400 mb-4 md:mb-0">
+                © 2024 Librízate - El Archivista Orgánico. Todos los derechos reservados.
+            </p>
+<div class="flex gap-8">
+<a class="font-['Manrope'] text-xs text-stone-400 hover:text-[#5e3d22] transition-all hover:underline" href="#">Aviso Legal</a>
+<a class="font-['Manrope'] text-xs text-stone-400 hover:text-[#5e3d22] transition-all hover:underline" href="#">Privacidad</a>
+<a class="font-['Manrope'] text-xs text-stone-400 hover:text-[#5e3d22] transition-all hover:underline" href="#">Contacto</a>
+<a class="font-['Manrope'] text-xs text-stone-400 hover:text-[#5e3d22] transition-all hover:underline" href="#">Términos</a>
+</div>
+</div>
+</footer>
+</body></html>
