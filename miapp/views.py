@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from .forms import RegistroForm, LoginForm, PedidoForm
@@ -10,7 +10,6 @@ from .models import Cliente, Pedido
 from .repositories import ClienteRepository, PedidoRepository, UsuarioRepository
 import requests
 import io
-from django.contrib.auth import logout
 
 
 # ─────────────────────────────────────────
@@ -18,7 +17,39 @@ from django.contrib.auth import logout
 # ─────────────────────────────────────────
 
 def inicio_sin_sesion(request):
-    return render(request, 'inicio_sin_sesion.html')
+    """
+    Página de inicio pública. Carga 4 libros de la API para
+    mostrar en la sección Colecciones Destacadas.
+    """
+    libros_destacados = []
+    try:
+        headers  = {'User-Agent': 'Mozilla/5.0'}
+        url      = "https://openlibrary.org/search.json?q=don+quijote+garcia+marquez+neruda+borges&limit=4&lang=spa"
+        response = requests.get(url, timeout=6, headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+            for doc in data.get('docs', [])[:4]:
+                cover_id = doc.get('cover_i')
+                libros_destacados.append({
+                    'titulo': doc.get('title', 'Sin título'),
+                    'autor':  (doc.get('author_name') or ['Desconocido'])[0],
+                    'imagen': f"https://covers.openlibrary.org/b/id/{cover_id}-M.jpg" if cover_id else '',
+                })
+    except Exception:
+        pass
+
+    # Fallback si la API no responde
+    if not libros_destacados:
+        libros_destacados = [
+            {'titulo': 'Cien Años de Soledad',  'autor': 'Gabriel García Márquez', 'imagen': 'https://covers.openlibrary.org/b/id/8224600-M.jpg'},
+            {'titulo': 'La Metamorfosis',        'autor': 'Franz Kafka',            'imagen': 'https://covers.openlibrary.org/b/id/8091024-M.jpg'},
+            {'titulo': 'Veinte Poemas de Amor',  'autor': 'Pablo Neruda',           'imagen': 'https://covers.openlibrary.org/b/id/8226198-M.jpg'},
+            {'titulo': 'Don Quijote',            'autor': 'Miguel de Cervantes',    'imagen': 'https://covers.openlibrary.org/b/id/8739161-M.jpg'},
+        ]
+
+    return render(request, 'inicio_sin_sesion.html', {
+        'libros_destacados': libros_destacados,
+    })
 
 
 @login_required
@@ -101,7 +132,7 @@ def registro(request):
 
 
 # ─────────────────────────────────────────
-# CATÁLOGO —  Books API
+# CATÁLOGO — Open Library API
 # ─────────────────────────────────────────
 
 def catalogo(request):
@@ -109,7 +140,7 @@ def catalogo(request):
     genre        = request.GET.get('genre', '')
     genre_activo = genre
 
-    busqueda = query if query else 'novela española bestseller'
+    busqueda = query if query else 'bestseller'
     if genre and not query:
         busqueda = {
             'fiction': 'ficcion novela',
@@ -119,7 +150,7 @@ def catalogo(request):
             'poetry':  'poesia',
         }.get(genre, 'literatura')
 
-    url     = f"https://openlibrary.org/search.json?q={busqueda}&limit=12&lang=spa"
+    url     = f"https://openlibrary.org/search.json?q={busqueda}&limit=30"
     headers = {'User-Agent': 'Mozilla/5.0'}
     libros  = []
 
@@ -127,7 +158,7 @@ def catalogo(request):
         response = requests.get(url, timeout=8, headers=headers)
         if response.status_code == 200:
             data = response.json()
-            for doc in data.get('docs', [])[:12]:
+            for doc in data.get('docs', [])[:30]:
                 titulo   = doc.get('title', 'Sin título')
                 autores  = doc.get('author_name', ['Desconocido'])
                 cover_id = doc.get('cover_i')
@@ -152,6 +183,8 @@ def catalogo(request):
         'query':        query,
         'genre_activo': genre_activo,
     })
+
+
 # ─────────────────────────────────────────
 # CREAR PEDIDO desde catálogo
 # ─────────────────────────────────────────
@@ -238,7 +271,7 @@ def cancelar_pedido(request, pedido_id):
 
 
 # ─────────────────────────────────────────
-# EXPORTAR EXCEL  ← punto 9
+# EXPORTAR EXCEL
 # ─────────────────────────────────────────
 
 @login_required
@@ -256,14 +289,12 @@ def exportar_excel(request):
     ws = wb.active
     ws.title = 'Mis Pedidos — Librízate'
 
-    # Estilos
-    header_font  = Font(bold=True, color='FFFFFF', size=11, name='Calibri')
-    header_fill  = PatternFill('solid', fgColor='5E3D22')
-    center       = Alignment(horizontal='center', vertical='center', wrap_text=True)
-    thin         = Side(style='thin', color='D4C3B9')
-    border       = Border(left=thin, right=thin, top=thin, bottom=thin)
+    header_font = Font(bold=True, color='FFFFFF', size=11, name='Calibri')
+    header_fill = PatternFill('solid', fgColor='5E3D22')
+    center      = Alignment(horizontal='center', vertical='center', wrap_text=True)
+    thin        = Side(style='thin', color='D4C3B9')
+    border      = Border(left=thin, right=thin, top=thin, bottom=thin)
 
-    # Fila título
     ws.merge_cells('A1:F1')
     ws['A1'].value     = 'Librízate — Historial de Pedidos'
     ws['A1'].font      = Font(bold=True, size=14, color='5E3D22', name='Calibri')
@@ -271,7 +302,6 @@ def exportar_excel(request):
     ws['A1'].alignment = center
     ws.row_dimensions[1].height = 28
 
-    # Fila usuario/fecha
     import datetime
     ws.merge_cells('A2:F2')
     ws['A2'].value     = f'Usuario: {request.user.get_full_name() or request.user.username}   |   Generado: {datetime.datetime.now().strftime("%d/%m/%Y %H:%M")}'
@@ -279,33 +309,23 @@ def exportar_excel(request):
     ws['A2'].alignment = center
     ws.row_dimensions[2].height = 16
 
-    ws.append([])  # fila vacía
+    ws.append([])
 
-    # Cabeceras
     headers = ['#', 'Título', 'Autor', 'Estado', 'Fecha', 'Email cliente']
     for col, h in enumerate(headers, 1):
-        cell            = ws.cell(row=4, column=col, value=h)
-        cell.font       = header_font
-        cell.fill       = header_fill
-        cell.alignment  = center
-        cell.border     = border
+        cell           = ws.cell(row=4, column=col, value=h)
+        cell.font      = header_font
+        cell.fill      = header_fill
+        cell.alignment = center
+        cell.border    = border
     ws.row_dimensions[4].height = 20
 
-    # Datos
     estado_labels = dict(Pedido.ESTADOS)
-    fill_par   = PatternFill('solid', fgColor='FFF8F4')
-    fill_impar = PatternFill('solid', fgColor='FFFFFF')
+    fill_par      = PatternFill('solid', fgColor='FFF8F4')
+    fill_impar    = PatternFill('solid', fgColor='FFFFFF')
 
     for i, p in enumerate(pedidos, 1):
-        row_data = [
-            p.id,
-            p.titulo,
-            p.autor,
-            estado_labels.get(p.estado, p.estado),
-            p.fecha.strftime('%d/%m/%Y'),
-            p.cliente.usuario.email,
-        ]
-        ws.append(row_data)
+        ws.append([p.id, p.titulo, p.autor, estado_labels.get(p.estado, p.estado), p.fecha.strftime('%d/%m/%Y'), p.cliente.usuario.email])
         row_num = ws.max_row
         fill = fill_par if i % 2 == 0 else fill_impar
         for col in range(1, 7):
@@ -315,7 +335,6 @@ def exportar_excel(request):
             cell.alignment = Alignment(vertical='center')
         ws.row_dimensions[row_num].height = 16
 
-    # Anchos
     ws.column_dimensions['A'].width = 7
     ws.column_dimensions['B'].width = 42
     ws.column_dimensions['C'].width = 28
@@ -323,21 +342,17 @@ def exportar_excel(request):
     ws.column_dimensions['E'].width = 13
     ws.column_dimensions['F'].width = 32
 
-    # Respuesta
     output = io.BytesIO()
     wb.save(output)
     output.seek(0)
 
-    response = HttpResponse(
-        output.read(),
-        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    )
+    response = HttpResponse(output.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename="librizate_pedidos.xlsx"'
     return response
 
 
 # ─────────────────────────────────────────
-# EXPORTAR PDF  ← punto 10
+# EXPORTAR PDF
 # ─────────────────────────────────────────
 
 @login_required
@@ -357,11 +372,7 @@ def exportar_pdf(request, pedido_id):
         response['Content-Disposition'] = f'attachment; filename="pedido_{pedido.id}.pdf"'
         return response
     except ImportError:
-        # Fallback: página HTML imprimible con botón Ctrl+P
-        return render(request, 'pedido_pdf.html', {
-            'pedido':     pedido,
-            'print_mode': True,
-        })
+        return render(request, 'pedido_pdf.html', {'pedido': pedido, 'print_mode': True})
 
 
 # ─────────────────────────────────────────
@@ -377,8 +388,9 @@ def add_carrito(request):
 def detalle_pedido(request):
     return redirect('mis_pedidos')
 
+
 # ─────────────────────────────────────────
-# CERRAR SESIÓN 
+# CERRAR SESIÓN
 # ─────────────────────────────────────────
 
 def cerrar_sesion(request):

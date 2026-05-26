@@ -1,311 +1,244 @@
 <!DOCTYPE html>
-
-<html class="light" lang="es"><head>
+<html class="light" lang="es">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Librízate | El Curador Digital</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed-dim": "#e4c09a",
-                        "surface-tint": "#7c5639",
-                        "surface": "#fbf9f7",
-                        "on-secondary": "#ffffff",
-                        "secondary-fixed-dim": "#e7c08e",
-                        "error-container": "#ffdad6",
-                        "primary-fixed-dim": "#efbc98",
-                        "on-primary-fixed": "#2f1501",
-                        "surface-variant": "#e4e2e0",
-                        "surface-container-high": "#eae8e6",
-                        "on-secondary-fixed": "#291800",
-                        "tertiary-fixed": "#ffddb9",
-                        "on-primary-container": "#fffbff",
-                        "on-error-container": "#93000a",
-                        "on-tertiary-fixed-variant": "#5b4225",
-                        "on-surface": "#1b1c1b",
-                        "surface-container-highest": "#e4e2e0",
-                        "on-tertiary-container": "#fffbff",
-                        "tertiary": "#725738",
-                        "primary": "#795437",
-                        "surface-bright": "#fbf9f7",
-                        "on-tertiary-fixed": "#2a1701",
-                        "surface-container": "#efedec",
-                        "primary-fixed": "#ffdcc4",
-                        "on-secondary-container": "#795b32",
-                        "on-primary-fixed-variant": "#613f24",
-                        "secondary-fixed": "#ffddb4",
-                        "outline": "#82746c",
-                        "outline-variant": "#d4c3b9",
-                        "on-background": "#1b1c1b",
-                        "secondary-container": "#ffd6a3",
-                        "inverse-on-surface": "#f2f0ee",
-                        "on-secondary-fixed-variant": "#5c421b",
-                        "on-primary": "#ffffff",
-                        "inverse-surface": "#30302f",
-                        "inverse-primary": "#efbc98",
-                        "on-error": "#ffffff",
-                        "error": "#ba1a1a",
-                        "surface-container-low": "#f5f3f1",
-                        "background": "#fbf9f7",
-                        "tertiary-container": "#8d6f4e",
-                        "surface-container-lowest": "#ffffff",
-                        "on-surface-variant": "#50443d",
-                        "secondary": "#775930",
-                        "surface-dim": "#dbdad8",
-                        "on-tertiary": "#ffffff",
-                        "primary-container": "#956c4d"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "fontFamily": {
-                        "headline": ["Newsreader", "serif"],
-                        "body": ["Manrope", "sans-serif"],
-                        "label": ["Manrope", "sans-serif"]
-                    }
-                },
-            },
-        }
-    </script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "tertiary-fixed-dim":"#e4c09a","surface-tint":"#7c5639","surface":"#fbf9f7",
+        "on-secondary":"#ffffff","secondary-fixed-dim":"#e7c08e","error-container":"#ffdad6",
+        "primary-fixed-dim":"#efbc98","on-primary-fixed":"#2f1501","surface-variant":"#e4e2e0",
+        "surface-container-high":"#eae8e6","on-secondary-fixed":"#291800","tertiary-fixed":"#ffddb9",
+        "on-primary-container":"#fffbff","on-error-container":"#93000a","on-tertiary-fixed-variant":"#5b4225",
+        "on-surface":"#1b1c1b","surface-container-highest":"#e4e2e0","on-tertiary-container":"#fffbff",
+        "tertiary":"#725738","primary":"#795437","surface-bright":"#fbf9f7","on-tertiary-fixed":"#2a1701",
+        "surface-container":"#efedec","primary-fixed":"#ffdcc4","on-secondary-container":"#795b32",
+        "on-primary-fixed-variant":"#613f24","secondary-fixed":"#ffddb4","outline":"#82746c",
+        "outline-variant":"#d4c3b9","on-background":"#1b1c1b","secondary-container":"#ffd6a3",
+        "inverse-on-surface":"#f2f0ee","on-secondary-fixed-variant":"#5c421b","on-primary":"#ffffff",
+        "inverse-surface":"#30302f","inverse-primary":"#efbc98","on-error":"#ffffff","error":"#ba1a1a",
+        "surface-container-low":"#f5f3f1","background":"#fbf9f7","tertiary-container":"#8d6f4e",
+        "surface-container-lowest":"#ffffff","on-surface-variant":"#50443d","secondary":"#775930",
+        "surface-dim":"#dbdad8","on-tertiary":"#ffffff","primary-container":"#956c4d"
+      },
+      borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},
+      fontFamily:{"headline":["Newsreader","serif"],"body":["Manrope","sans-serif"],"label":["Manrope","sans-serif"]}
+    }}
+  }
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body { font-family: 'Manrope', sans-serif; background-color: #fbf9f7; color: #1b1c1b; }
-        h1, h2, h3, .font-serif { font-family: 'Newsreader', serif; }
-    </style>
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; }
+  body { font-family:'Manrope',sans-serif; background-color:#fbf9f7; color:#1b1c1b; }
+  h1,h2,h3,.font-serif { font-family:'Newsreader',serif; }
+</style>
 </head>
+
 <body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
-<!-- TopNavBar -->
+
+<!-- NAVBAR -->
 <nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl shadow-[0_48px_48px_-12px_rgba(121,84,55,0.04)]">
 <div class="flex justify-between items-center h-20 px-8 max-w-[1920px] mx-auto">
-<div class="text-2xl font-serif italic text-[#795437] dark:text-[#a67b5b]">Librízate</div>
-<div class="hidden md:flex gap-8 items-center">
-<a class="text-[#795437] border-b-2 border-[#795437] pb-1 font-semibold font-label text-sm tracking-wide" href="/">Inicio</a>
-<a class="text-stone-500 font-medium hover:text-[#956c4d] transition-colors duration-300 font-label text-sm tracking-wide" href="/catalogo/">Catálogo</a>
-<a class="text-stone-500 font-medium hover:text-[#956c4d] transition-colors duration-300 font-label text-sm tracking-wide" href="/pedido/">Mis Pedidos</a>
-</div>
-<div class="flex items-center gap-6">
-
+  <div class="text-2xl font-serif italic text-[#795437]">Librízate</div>
+  <div class="hidden md:flex gap-8 items-center">
+    <a class="text-[#795437] border-b-2 border-[#795437] pb-1 font-semibold font-label text-sm tracking-wide" href="/">Inicio</a>
+    <a class="text-stone-500 font-medium hover:text-[#956c4d] transition-colors duration-300 font-label text-sm tracking-wide" href="/catalogo/">Catálogo</a>
+    <a class="text-stone-500 font-medium hover:text-[#956c4d] transition-colors duration-300 font-label text-sm tracking-wide" href="/pedidos/">Mis Pedidos</a>
+  </div>
+  <div class="flex items-center gap-6">
     {% if user.is_authenticated %}
-
-    <a href="{% url 'logout' %}"
-       class="text-red-600 font-label text-sm font-bold tracking-wide hover:opacity-80">
-        Cerrar sesión
-    </a>
-
+      <span class="text-sm text-secondary font-medium">{{ user.username }}</span>
+      <a href="{% url 'cerrar_sesion' %}" class="text-red-600 font-label text-sm font-bold tracking-wide hover:opacity-80">Cerrar sesión</a>
     {% else %}
-
-    <a href="/inicio_sesion/"
-       class="text-primary font-label text-sm font-bold tracking-wide hover:opacity-80">
-        Iniciar Sesión
-    </a>
-
-    <a href="/registro/"
-       class="bg-primary text-on-primary px-6 py-2.5 rounded-md font-label text-sm font-bold tracking-wide shadow-sm hover:bg-primary-container">
-        Registrarse
-    </a>
-
+      <a href="/inicio_sesion/" class="text-primary font-label text-sm font-bold tracking-wide hover:opacity-80">Iniciar Sesión</a>
+      <a href="/registro/" class="bg-primary text-on-primary px-6 py-2.5 rounded-md font-label text-sm font-bold tracking-wide shadow-sm hover:bg-primary-container">Registrarse</a>
     {% endif %}
-
-</div>
+  </div>
 </div>
 </nav>
+
 <main class="pt-20">
-<!-- Hero Section -->
-<section class="relative min-h-[921px] flex items-center overflow-hidden bg-surface">
-<div class="container mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
-<div class="z-10">
-<span class="inline-block px-4 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] uppercase tracking-[0.2em] font-bold mb-6">
-                        Exclusividad Literaria
-                    </span>
-<h1 class="text-7xl md:text-8xl font-serif leading-tight text-on-surface mb-8 italic">
-                        El arte de <br/>
-<span class="text-primary">coleccionar</span> historias.
-                    </h1>
-<p class="text-lg text-on-surface-variant max-w-md mb-12 font-body leading-relaxed">
-                        Gestiona tu biblioteca personal con la elegancia que tus libros merecen. Una experiencia editorial diseñada para el curador moderno.
-                    </p>
-<div class="flex flex-wrap gap-4">
-<button class="bg-primary text-on-primary px-10 py-4 rounded-md font-bold tracking-wide flex items-center gap-2 group shadow-lg shadow-primary/10">
-                            Explorar Catálogo
-                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-<button class="bg-surface-container-high text-primary px-10 py-4 rounded-md font-bold tracking-wide hover:bg-surface-container-highest transition-colors">
-                            Nuestra Visión
-                        </button>
-</div>
-</div>
-<div class="relative group">
-<div class="aspect-[4/5] rounded-xl overflow-hidden bg-surface-container-low shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-700">
-<img class="w-full h-full object-cover" data-alt="Close-up of old leather bound books on a rustic wooden shelf with soft warm library lighting and dust motes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK0dPjsJOi08kZDFPlIJqz5X9jQqVB-mXhRq5z-AO6KkFeDMjrVBvrAs7j7eYxOB0TZBIgEDQxUZ2wTegSzH0XaQlfY-sYslU8Inq8-__BYSQn2NFZtxckKCuBlK4Eme-FfRCdTE4NkBhhpUWosOd7fgMVilGEafFSaQSii7Y3V-eoPmT2zW0bPI6fuceoTPubAL5cbDVOyLUKjakhbbmk50p2DQ93vAiJtvvaxuBtC6YnFkWoT6prKsw4LtHoO6mlWF_j1wd67Xo"/>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
-</div>
-<!-- Decorative element -->
-<div class="absolute -bottom-8 -left-8 w-48 h-48 bg-tertiary-fixed rounded-full -z-10 blur-3xl opacity-30"></div>
-</div>
-</div>
-</section>
-<!-- Asymmetric Bento Grid: Features/About -->
-<section class="py-32 bg-surface-container-low">
-<div class="container mx-auto px-8">
-<div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-<div class="max-w-2xl">
-<h2 class="text-5xl font-serif mb-6 italic">La Curaduría Digital</h2>
-<p class="text-on-surface-variant font-body text-lg">Más que un inventario, es un santuario para el conocimiento. Librízate ofrece herramientas precisas envueltas en una estética atemporal.</p>
-</div>
-<div class="text-right">
-<span class="text-6xl font-serif text-outline-variant/30">MCMXXIV</span>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[600px]">
-<div class="md:col-span-4 bg-surface-container-lowest p-10 rounded-xl flex flex-col justify-between border border-outline-variant/15 group hover:bg-primary transition-colors duration-500">
-<span class="material-symbols-outlined text-primary text-5xl group-hover:text-on-primary">menu_book</span>
-<div>
-<h3 class="text-2xl font-serif mb-4 group-hover:text-on-primary">Gestión Editorial</h3>
-<p class="text-on-surface-variant text-sm group-hover:text-on-primary/80">Organiza por ediciones raras, estados de conservación y procedencia histórica.</p>
-</div>
-</div>
-<div class="md:col-span-8 relative rounded-xl overflow-hidden group">
-<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Spacious minimalist library with high ceilings, warm oak bookshelves and a single leather reading chair by a tall window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5Oq0WCmSmwIK7CX4dgCpbVJ_hj-ZGYpEYcWAGM4w17l-aCGvzN7AcnY9scSJPodNP1ZkxSYxeLFCZTv3J0_fGkqSbDv_2qqE0Vg4CgRQ5cg2l1vB1eILHHTJPIFvpno3SgtFlZWvM-ldXYVu7VHjJIRLnJcCnqWcHtvqEfDpXJhPiOv47ON6jO4Ct_JGnI3cBtpEV3QWRFYBFRgG7AZ_-oOTc2ju3Ih0z9ZEPXWt61QsCx4yIZ23aAv7IAls-MwZk500iVADlQps"/>
-<div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute bottom-8 left-8 text-on-primary">
-<h3 class="text-3xl font-serif italic">Tu Biblioteca, Tu Legado</h3>
-</div>
-</div>
-<div class="md:col-span-7 relative rounded-xl overflow-hidden min-h-[300px]">
-<div class="absolute inset-0 bg-tertiary p-10 flex flex-col justify-center">
-<h3 class="text-4xl font-serif text-on-tertiary italic mb-6">"Los libros no se prestan, se comparten con el alma."</h3>
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-on-tertiary">
-<img class="w-full h-full object-cover" data-alt="Portrait of an elderly distinguished curator with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKnbXqUWi7lg55rE6--e6bApb9FwhN9nzuNetA5ZCFqkuPSZG4NiK7Y0BMeuI2I0o0MP7I8Zr8kai6wW9eTVnO1UQwaDaXu0zOppG6chx5U285Oa60QnhkZSXv3LeuLxxjzACK35PdUb7N8GJ-IFhvAUe4r2Pr7w3Txl9pwhftpVB_dWHE9fLH3x6F0CPvOfum2nA7W3zcfgXLRym2MlFNQa28NRpO6cZtQbShGvZkVZdHqtKqG54OFpoqchaa9k4Ro2nuVnDObSU"/>
-</div>
-<div>
-<p class="text-on-tertiary font-bold text-sm">Julián Valdemar</p>
-<p class="text-on-tertiary/70 text-[10px] uppercase tracking-widest">Archivista Senior</p>
-</div>
-</div>
-</div>
-</div>
-<div class="md:col-span-5 bg-surface-container-highest p-10 rounded-xl flex flex-col justify-end border border-outline-variant/15">
-<h3 class="text-2xl font-serif mb-4">Seguimiento de Préstamos</h3>
-<p class="text-on-surface-variant text-sm mb-6">Control absoluto sobre quién custodia tus tesoros literarios, con notificaciones automáticas y bitácora de estado.</p>
-<div class="flex -space-x-3">
-<div class="w-10 h-10 rounded-full border-2 border-surface bg-primary-fixed"></div>
-<div class="w-10 h-10 rounded-full border-2 border-surface bg-secondary-fixed"></div>
-<div class="w-10 h-10 rounded-full border-2 border-surface bg-tertiary-fixed"></div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Featured Books: The Folio Display -->
-<section class="py-32 bg-surface">
-<div class="container mx-auto px-8">
-<div class="flex justify-between items-baseline mb-16">
-<h2 class="text-5xl font-serif italic">Colecciones Destacadas</h2>
-<a class="font-label text-xs uppercase tracking-widest text-primary font-bold hover:underline" href="#">Ver todo el catálogo</a>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-<!-- Book Card 1 -->
-<div class="group cursor-pointer">
-<div class="aspect-[2/3] bg-surface-container-low rounded-xl overflow-hidden mb-6 relative shadow-sm group-hover:shadow-2xl transition-all duration-500">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Abstract minimalist book cover with gold foil accents and cream linen texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdeQ7rryE8SFoaGR1bXaggGV4uaavEhc5-w-GCA4jgwynMQQdEnBbr5ULq7A8ydHft-zB6iIyP7Z68YwLj6NDATVQF1AvhZuK9kRv_jnzydeuQX_fe_KB55fOjQ2F627NLPmzJZ537Tw1m5M8hAL1EzFhsZ3OTjGPo77bm56YbHVaNM7VQ3LExcCxSTQ-DAdn9FM4zmn1xRBzTJcGkE_XN8mH2E6Ol92qk0edqe-xw6B5LRctFMv_9OXdGW7oM0izfhdaLsWg-z3o"/>
-<div class="absolute top-4 right-4">
-<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Edición Rara</span>
-</div>
-</div>
-<h3 class="text-2xl font-serif group-hover:text-primary transition-colors">Cien Años de Soledad</h3>
-<p class="text-on-surface-variant font-body text-sm mt-1">Gabriel García Márquez</p>
-<div class="mt-4 flex gap-2">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<span class="text-[10px] uppercase tracking-widest text-outline">Disponible</span>
-</div>
-</div>
-<!-- Book Card 2 -->
-<div class="group cursor-pointer translate-y-8">
-<div class="aspect-[2/3] bg-surface-container-low rounded-xl overflow-hidden mb-6 relative shadow-sm group-hover:shadow-2xl transition-all duration-500">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Vintage classic novel cover with elegant typography on dark green textured paper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANLkIMtIm5lzq48RvT6J9JneF3DVgH4YQxfIvE3R07wsOkx2h62KjNh78UKEI5lnsjkMXWjQp2bu7DvVuwj4lVdwwHutRbY5E36Xh5x-vciL0A_VRWhkdDo_1JkXgJWqHqisZj6Hy7fzlndkTUYhp2xBWSDz2YaFoI_FqTn90hoYkdu44FVSmlGG8asRqrpMq_COZWC8dOqqhUU3iUA9fFG_oIyE8mVMuBQvs2_yWczrxqyvmXAidt4x3ZpL7Pc7ea_bXvqbF_-sA"/>
-<div class="absolute top-4 right-4">
-<span class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Favorito</span>
-</div>
-</div>
-<h3 class="text-2xl font-serif group-hover:text-primary transition-colors">La Metamorfosis</h3>
-<p class="text-on-surface-variant font-body text-sm mt-1">Franz Kafka</p>
-<div class="mt-4 flex gap-2">
-<span class="w-2 h-2 rounded-full bg-secondary"></span>
-<span class="text-[10px] uppercase tracking-widest text-outline">En Préstamo</span>
-</div>
-</div>
-<!-- Book Card 3 -->
-<div class="group cursor-pointer">
-<div class="aspect-[2/3] bg-surface-container-low rounded-xl overflow-hidden mb-6 relative shadow-sm group-hover:shadow-2xl transition-all duration-500">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Elegant poetry book cover with soft floral illustrations and handwritten script" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzUPMSQ-pqpN23sE3gjZrb4rS1il_IvtR6CouhqtahzG_JhlFVjeexKyVDUIVOFKWWUIUKJCdc3Fh0qZchZaGUbWW5eB3JEgFV0-4Unrzxr-Wq5gAHhTE7NUXnJEvEBRylLlkYEqL9sqPujVxGQKrlhEjwY93SiuUX-7O0g6IWHtG4VTWsptdOxEyk6rDWMIt22JKf9YZYzlCc_cCdQ1GOwY9SwaW4YbPBrKGnq7W6cRjVYYD_rADYUT_DY7NPUzf7LkGxWUarVaU"/>
-</div>
-<h3 class="text-2xl font-serif group-hover:text-primary transition-colors">Veinte Poemas de Amor</h3>
-<p class="text-on-surface-variant font-body text-sm mt-1">Pablo Neruda</p>
-<div class="mt-4 flex gap-2">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<span class="text-[10px] uppercase tracking-widest text-outline">Disponible</span>
-</div>
-</div>
-<!-- Book Card 4 -->
-<div class="group cursor-pointer translate-y-8">
-<div class="aspect-[2/3] bg-surface-container-low rounded-xl overflow-hidden mb-6 relative shadow-sm group-hover:shadow-2xl transition-all duration-500">
-<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="A thick leather bound journal on a desk with a quill pen nearby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEPYq2R7iMmgnRyMmOai9XwH5Ym70GKX0-111cKY7JT8y770bJBWw5uXx7RIP-Rt-UCHR9ZS1DybbRBAfAgQ7plqIOry36dM6KAywArnjne-rlGpEaJS_m24kyTE1n1JO1Elh73QkmaSON7z-ME0vg042i67JfJ7Q1rILvC5TuPyL-W97dbZoUSmY0Eud-W9dW80425NsTm7hLkhGzkEtw50jEuj9uiCgL_6lljy8RXG8-CnWQp2708bvCztlZOoXOcDtsGMvaCCU"/>
-<div class="absolute top-4 right-4">
-<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Nuevo</span>
-</div>
-</div>
-<h3 class="text-2xl font-serif group-hover:text-primary transition-colors">Crónicas del Mañana</h3>
-<p class="text-on-surface-variant font-body text-sm mt-1">Autor Desconocido</p>
-<div class="mt-4 flex gap-2">
-<span class="w-2 h-2 rounded-full bg-primary"></span>
-<span class="text-[10px] uppercase tracking-widest text-outline">Disponible</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- CTA Section -->
-<section class="py-32">
-<div class="container mx-auto px-8">
-<div class="bg-primary-container rounded-3xl p-16 md:p-24 text-center relative overflow-hidden">
-<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-<div class="absolute top-[-50%] left-[-20%] w-[100%] h-[200%] bg-gradient-to-br from-white to-transparent rotate-12"></div>
-</div>
-<div class="relative z-10 max-w-3xl mx-auto">
-<h2 class="text-5xl md:text-7xl font-serif text-on-primary-container mb-8 italic">Comienza tu propia curaduría hoy mismo.</h2>
-<p class="text-on-primary-container/80 text-xl mb-12 font-body leading-relaxed">Únete a la comunidad de bibliófilos que valoran la gestión impecable y el diseño excepcional.</p>
-<div class="flex flex-col sm:flex-row gap-6 justify-center">
-<button class="bg-surface text-primary px-12 py-5 rounded-md font-bold text-lg hover:bg-surface-bright transition-colors shadow-xl">Crear Cuenta Gratuita</button>
-<button class="border-2 border-surface text-surface px-12 py-5 rounded-md font-bold text-lg hover:bg-surface/10 transition-colors">Hablar con un Archivista</button>
-</div>
-</div>
-</div>
-</div>
-</section>
+
+  <!-- HERO -->
+  <section class="relative min-h-[921px] flex items-center overflow-hidden bg-surface">
+  <div class="container mx-auto px-8 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="z-10">
+      <span class="inline-block px-4 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-[10px] uppercase tracking-[0.2em] font-bold mb-6">
+        Exclusividad Literaria
+      </span>
+      <h1 class="text-7xl md:text-8xl font-serif leading-tight text-on-surface mb-8 italic">
+        El arte de <br/>
+        <span class="text-primary">coleccionar</span> historias.
+      </h1>
+      <p class="text-lg text-on-surface-variant max-w-md mb-12 font-body leading-relaxed">
+        Gestiona tu biblioteca personal con la elegancia que tus libros merecen. Una experiencia editorial diseñada para el curador moderno.
+      </p>
+      <div class="flex flex-wrap gap-4">
+
+        <!-- ✅ Explorar Catálogo → va al catálogo real -->
+        <a href="/catalogo/"
+           class="bg-primary text-on-primary px-10 py-4 rounded-md font-bold tracking-wide flex items-center gap-2 group shadow-lg shadow-primary/10 hover:bg-primary-container transition-colors">
+          Explorar Catálogo
+          <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </a>
+
+        <!-- ✅ Nuestra Visión → scroll suave a la sección de features -->
+        <a href="#vision"
+           class="bg-surface-container-high text-primary px-10 py-4 rounded-md font-bold tracking-wide hover:bg-surface-container-highest transition-colors">
+          Nuestra Visión
+        </a>
+
+      </div>
+    </div>
+    <div class="relative group">
+      <div class="aspect-[4/5] rounded-xl overflow-hidden bg-surface-container-low shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-700">
+        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCK0dPjsJOi08kZDFPlIJqz5X9jQqVB-mXhRq5z-AO6KkFeDMjrVBvrAs7j7eYxOB0TZBIgEDQxUZ2wTegSzH0XaQlfY-sYslU8Inq8-__BYSQn2NFZtxckKCuBlK4Eme-FfRCdTE4NkBhhpUWosOd7fgMVilGEafFSaQSii7Y3V-eoPmT2zW0bPI6fuceoTPubAL5cbDVOyLUKjakhbbmk50p2DQ93vAiJtvvaxuBtC6YnFkWoT6prKsw4LtHoO6mlWF_j1wd67Xo" alt="Biblioteca Librízate"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+      </div>
+      <div class="absolute -bottom-8 -left-8 w-48 h-48 bg-tertiary-fixed rounded-full -z-10 blur-3xl opacity-30"></div>
+    </div>
+  </div>
+  </section>
+
+  <!-- NUESTRA VISIÓN (id para el scroll) -->
+  <section id="vision" class="py-32 bg-surface-container-low">
+  <div class="container mx-auto px-8">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+      <div class="max-w-2xl">
+        <h2 class="text-5xl font-serif mb-6 italic">La Curaduría Digital</h2>
+        <p class="text-on-surface-variant font-body text-lg">Más que un inventario, es un santuario para el conocimiento. Librízate ofrece herramientas precisas envueltas en una estética atemporal.</p>
+      </div>
+      <div class="text-right">
+        <span class="text-6xl font-serif text-outline-variant/30">MCMXXIV</span>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 h-auto md:h-[600px]">
+      <div class="md:col-span-4 bg-surface-container-lowest p-10 rounded-xl flex flex-col justify-between border border-outline-variant/15 group hover:bg-primary transition-colors duration-500">
+        <span class="material-symbols-outlined text-primary text-5xl group-hover:text-on-primary">menu_book</span>
+        <div>
+          <h3 class="text-2xl font-serif mb-4 group-hover:text-on-primary">Gestión Editorial</h3>
+          <p class="text-on-surface-variant text-sm group-hover:text-on-primary/80">Organiza por ediciones raras, estados de conservación y procedencia histórica.</p>
+        </div>
+      </div>
+      <div class="md:col-span-8 relative rounded-xl overflow-hidden group">
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5Oq0WCmSmwIK7CX4dgCpbVJ_hj-ZGYpEYcWAGM4w17l-aCGvzN7AcnY9scSJPodNP1ZkxSYxeLFCZTv3J0_fGkqSbDv_2qqE0Vg4CgRQ5cg2l1vB1eILHHTJPIFvpno3SgtFlZWvM-ldXYVu7VHjJIRLnJcCnqWcHtvqEfDpXJhPiOv47ON6jO4Ct_JGnI3cBtpEV3QWRFYBFRgG7AZ_-oOTc2ju3Ih0z9ZEPXWt61QsCx4yIZ23aAv7IAls-MwZk500iVADlQps" alt="Biblioteca"/>
+        <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors"></div>
+        <div class="absolute bottom-8 left-8 text-on-primary">
+          <h3 class="text-3xl font-serif italic">Tu Biblioteca, Tu Legado</h3>
+        </div>
+      </div>
+      <div class="md:col-span-7 relative rounded-xl overflow-hidden min-h-[300px]">
+        <div class="absolute inset-0 bg-tertiary p-10 flex flex-col justify-center">
+          <h3 class="text-4xl font-serif text-on-tertiary italic mb-6">"Los libros no se prestan, se comparten con el alma."</h3>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-on-tertiary">
+              <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKnbXqUWi7lg55rE6--e6bApb9FwhN9nzuNetA5ZCFqkuPSZG4NiK7Y0BMeuI2I0o0MP7I8Zr8kai6wW9eTVnO1UQwaDaXu0zOppG6chx5U285Oa60QnhkZSXv3LeuLxxjzACK35PdUb7N8GJ-IFhvAUe4r2Pr7w3Txl9pwhftpVB_dWHE9fLH3x6F0CPvOfum2nA7W3zcfgXLRym2MlFNQa28NRpO6cZtQbShGvZkVZdHqtKqG54OFpoqchaa9k4Ro2nuVnDObSU" alt="Archivista"/>
+            </div>
+            <div>
+              <p class="text-on-tertiary font-bold text-sm">Julián Valdemar</p>
+              <p class="text-on-tertiary/70 text-[10px] uppercase tracking-widest">Archivista Senior</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-5 bg-surface-container-highest p-10 rounded-xl flex flex-col justify-end border border-outline-variant/15">
+        <h3 class="text-2xl font-serif mb-4">Seguimiento de Pedidos</h3>
+        <p class="text-on-surface-variant text-sm mb-6">Control absoluto sobre el estado de tus libros: pendiente, en preparación, enviado o entregado.</p>
+        <div class="flex -space-x-3">
+          <div class="w-10 h-10 rounded-full border-2 border-surface bg-primary-fixed"></div>
+          <div class="w-10 h-10 rounded-full border-2 border-surface bg-secondary-fixed"></div>
+          <div class="w-10 h-10 rounded-full border-2 border-surface bg-tertiary-fixed"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- COLECCIONES DESTACADAS — libros de la API -->
+  <section class="py-32 bg-surface">
+  <div class="container mx-auto px-8">
+    <div class="flex justify-between items-baseline mb-16">
+      <h2 class="text-5xl font-serif italic">Colecciones Destacadas</h2>
+      <a class="font-label text-xs uppercase tracking-widest text-primary font-bold hover:underline" href="/catalogo/">Ver todo el catálogo</a>
+    </div>
+
+    <!-- Grid de libros desde la API (pasados por el contexto) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+      {% for libro in libros_destacados %}
+      <div class="group cursor-pointer {% if forloop.counter == 2 or forloop.counter == 4 %}translate-y-8{% endif %}">
+        <div class="aspect-[2/3] bg-surface-container-low rounded-xl overflow-hidden mb-6 relative shadow-sm group-hover:shadow-2xl transition-all duration-500">
+          {% if libro.imagen %}
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+               src="{{ libro.imagen }}" alt="{{ libro.titulo }}">
+          {% else %}
+          <div class="w-full h-full flex items-center justify-center bg-surface-container">
+            <span class="material-symbols-outlined text-5xl text-secondary/30">menu_book</span>
+          </div>
+          {% endif %}
+        </div>
+        <h3 class="text-2xl font-serif group-hover:text-primary transition-colors line-clamp-2">{{ libro.titulo }}</h3>
+        <p class="text-on-surface-variant font-body text-sm mt-1">{{ libro.autor }}</p>
+        <div class="mt-4 flex gap-2">
+          <span class="w-2 h-2 rounded-full bg-primary mt-1.5"></span>
+          <span class="text-[10px] uppercase tracking-widest text-outline">Disponible</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-32">
+  <div class="container mx-auto px-8">
+    <div class="bg-primary-container rounded-3xl p-16 md:p-24 text-center relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <div class="absolute top-[-50%] left-[-20%] w-[100%] h-[200%] bg-gradient-to-br from-white to-transparent rotate-12"></div>
+      </div>
+      <div class="relative z-10 max-w-3xl mx-auto">
+        <h2 class="text-5xl md:text-7xl font-serif text-on-primary-container mb-8 italic">
+          Comienza tu propia curaduría hoy mismo.
+        </h2>
+        <p class="text-on-primary-container/80 text-xl mb-12 font-body leading-relaxed">
+          Únete a la comunidad de bibliófilos que valoran la gestión impecable y el diseño excepcional.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <!-- ✅ Crear cuenta → registro real -->
+          <a href="/registro/"
+             class="bg-surface text-primary px-12 py-5 rounded-md font-bold text-lg hover:bg-surface-bright transition-colors shadow-xl">
+            Crear Cuenta Gratuita
+          </a>
+          <!-- ✅ Explorar catálogo en lugar de "Hablar con archivista" -->
+          <a href="/catalogo/"
+             class="border-2 border-surface text-surface px-12 py-5 rounded-md font-bold text-lg hover:bg-surface/10 transition-colors">
+            Explorar Catálogo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
 </main>
-<!-- Footer -->
+
+<!-- FOOTER -->
 <footer class="w-full py-12 mt-auto bg-stone-50 dark:bg-stone-950 border-t border-[#d4c3b9]/15">
 <div class="flex flex-col items-center justify-center gap-6">
-<div class="font-serif text-lg text-[#795437]">Librízate</div>
-<div class="flex gap-8">
-<a class="font-sans Manrope text-[10px] uppercase tracking-tighter text-[#725738] opacity-60 hover:opacity-100 transition-opacity" href="#">Terms of Service</a>
-<a class="font-sans Manrope text-[10px] uppercase tracking-tighter text-[#725738] opacity-60 hover:opacity-100 transition-opacity underline" href="#">Library Policy</a>
-<a class="font-sans Manrope text-[10px] uppercase tracking-tighter text-[#725738] opacity-60 hover:opacity-100 transition-opacity" href="#">Contact Archivist</a>
-</div>
-<p class="font-sans Manrope text-[10px] uppercase tracking-tighter text-[#725738] opacity-60">© 2024 Librízate. The Digital Curator.</p>
+  <div class="font-serif text-lg text-[#795437]">Librízate</div>
+  <div class="flex gap-8">
+    <a class="font-label text-[10px] uppercase tracking-tighter text-[#725738] opacity-60 hover:opacity-100 transition-opacity" href="#">Aviso Legal</a>
+    <a class="font-label text-[10px] uppercase tracking-tighter text-[#725738] opacity-60 hover:opacity-100 transition-opacity" href="#">Privacidad</a>
+    <a class="font-label text-[10px] uppercase tracking-tighter text-[#725738] opacity-60 hover:opacity-100 transition-opacity" href="/catalogo/">Catálogo</a>
+  </div>
+  <p class="font-label text-[10px] uppercase tracking-tighter text-[#725738] opacity-60">© 2024 Librízate. The Digital Curator.</p>
 </div>
 </footer>
-</body></html>
+
+</body>
+</html>
