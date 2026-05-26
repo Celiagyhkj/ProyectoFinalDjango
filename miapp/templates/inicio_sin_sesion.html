@@ -94,15 +94,30 @@
 <a class="text-[#795437] border-b-2 border-[#795437] pb-1 font-semibold font-label text-sm tracking-wide" href="/">Inicio</a>
 <a class="text-stone-500 font-medium hover:text-[#956c4d] transition-colors duration-300 font-label text-sm tracking-wide" href="/catalogo/">Catálogo</a>
 <a class="text-stone-500 font-medium hover:text-[#956c4d] transition-colors duration-300 font-label text-sm tracking-wide" href="/pedido/">Mis Pedidos</a>
-<a class="text-stone-500 font-medium hover:text-[#956c4d] transition-colors duration-300 font-label text-sm tracking-wide" href="/perfil/">Perfil</a>
 </div>
 <div class="flex items-center gap-6">
-<a href="/inicio_sesion/" class="text-primary font-label text-sm font-bold tracking-wide hover:opacity-80">
-    Iniciar Sesión
-</a>
-<a href="/registro/" class="bg-primary text-on-primary px-6 py-2.5 rounded-md font-label text-sm font-bold tracking-wide shadow-sm hover:bg-primary-container">
-    Registrarse
-</a>
+
+    {% if user.is_authenticated %}
+
+    <a href="{% url 'logout' %}"
+       class="text-red-600 font-label text-sm font-bold tracking-wide hover:opacity-80">
+        Cerrar sesión
+    </a>
+
+    {% else %}
+
+    <a href="/inicio_sesion/"
+       class="text-primary font-label text-sm font-bold tracking-wide hover:opacity-80">
+        Iniciar Sesión
+    </a>
+
+    <a href="/registro/"
+       class="bg-primary text-on-primary px-6 py-2.5 rounded-md font-label text-sm font-bold tracking-wide shadow-sm hover:bg-primary-container">
+        Registrarse
+    </a>
+
+    {% endif %}
+
 </div>
 </div>
 </nav>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <title>Pedido #{{ pedido.id }} — Librízate</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Manrope:wght@400;600;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Manrope', sans-serif; color: #1b1c1a; background: #fff; padding: 48px; font-size: 13px; line-height: 1.6; }
+    h1,h2,h3 { font-family: 'Noto Serif', serif; }
+
+    .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #5e3d22; padding-bottom: 24px; margin-bottom: 32px; }
+    .brand { font-family: 'Noto Serif', serif; font-size: 28px; font-weight: 700; color: #5e3d22; }
+    .brand-sub { font-size: 11px; color: #82746c; margin-top: 4px; }
+    .order-ref { text-align: right; }
+    .order-ref h2 { font-size: 18px; color: #5e3d22; }
+    .order-ref p { font-size: 11px; color: #82746c; margin-top: 2px; }
+
+    .status-badge { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 28px; }
+    .badge-pendiente   { background: #ffdcc4; color: #613f24; }
+    .badge-preparacion { background: #eedcd2; color: #695c54; }
+    .badge-enviado     { background: #c0eaf2; color: #244d53; }
+    .badge-entregado   { background: #d2eadd; color: #0d4a25; }
+    .badge-cancelado   { background: #ffdad6; color: #93000a; }
+
+    .section { margin-bottom: 28px; }
+    .section-title { font-size: 10px; text-transform: uppercase; letter-spacing: .15em; color: #82746c; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #efeeea; }
+
+    .book-row { display: flex; align-items: flex-start; gap: 16px; background: #f4f4f0; border-radius: 8px; padding: 16px; }
+    .book-cover { width: 60px; height: 78px; object-fit: cover; border-radius: 4px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(94,61,34,.2); }
+    .book-cover-placeholder { width: 60px; height: 78px; background: #efeeea; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 24px; }
+    .book-info h3 { font-size: 16px; color: #5e3d22; margin-bottom: 4px; }
+    .book-info p  { font-size: 12px; color: #695c54; }
+
+    .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .data-item label { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #82746c; display: block; margin-bottom: 3px; font-weight: 700; }
+    .data-item p { font-size: 13px; color: #1b1c1a; font-weight: 600; }
+
+    .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid #efeeea; text-align: center; font-size: 10px; color: #82746c; }
+
+    .print-btn { display: block; width: fit-content; margin: 0 auto 32px; padding: 10px 24px; background: #5e3d22; color: white; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; border: none; cursor: pointer; border-radius: 6px; font-family: 'Manrope', sans-serif; }
+    @media print { .print-btn, .back-btn { display: none; } }
+
+    .back-btn { display: inline-block; margin-bottom: 24px; font-size: 12px; color: #5e3d22; text-decoration: none; font-weight: 600; }
+    .back-btn:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  {% if print_mode %}
+  <a href="/pedidos/" class="back-btn">← Volver a Mis Pedidos</a>
+  <button class="print-btn" onclick="window.print()">🖨 Imprimir / Guardar PDF</button>
+  {% endif %}
+
+  <!-- CABECERA -->
+  <div class="header">
+    <div>
+      <div class="brand">Librízate</div>
+      <div class="brand-sub">El Archivista Orgánico · librízate.com</div>
+    </div>
+    <div class="order-ref">
+      <h2>Pedido #{{ pedido.id }}</h2>
+      <p>{{ pedido.fecha|date:"d/m/Y" }}</p>
+      <p>{{ pedido.cliente.usuario.get_full_name|default:pedido.cliente.usuario.username }}</p>
+    </div>
+  </div>
+
+  <!-- ESTADO -->
+  <span class="status-badge badge-{{ pedido.estado }}">
+    Estado: {{ pedido.get_estado_display }}
+  </span>
+
+  <!-- LIBRO -->
+  <div class="section">
+    <p class="section-title">Obra solicitada</p>
+    <div class="book-row">
+      {% if pedido.imagen %}
+      <img src="{{ pedido.imagen }}" alt="{{ pedido.titulo }}" class="book-cover">
+      {% else %}
+      <div class="book-cover-placeholder">📚</div>
+      {% endif %}
+      <div class="book-info">
+        <h3>{{ pedido.titulo }}</h3>
+        <p>{{ pedido.autor }}</p>
+        {% if pedido.descripcion %}
+        <p style="margin-top:8px;font-size:12px;color:#82746c;font-style:italic">{{ pedido.descripcion }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- DATOS DEL PEDIDO -->
+  <div class="section">
+    <p class="section-title">Detalles del pedido</p>
+    <div class="data-grid">
+      <div class="data-item">
+        <label>Número de pedido</label>
+        <p>#{{ pedido.id }}</p>
+      </div>
+      <div class="data-item">
+        <label>Fecha de pedido</label>
+        <p>{{ pedido.fecha|date:"d \d\e F \d\e Y" }}</p>
+      </div>
+      <div class="data-item">
+        <label>Estado actual</label>
+        <p>{{ pedido.get_estado_display }}</p>
+      </div>
+      <div class="data-item">
+        <label>Cliente</label>
+        <p>{{ pedido.cliente.usuario.get_full_name|default:pedido.cliente.usuario.username }}</p>
+      </div>
+      {% if pedido.cliente.usuario.email %}
+      <div class="data-item">
+        <label>Email</label>
+        <p>{{ pedido.cliente.usuario.email }}</p>
+      </div>
+      {% endif %}
+      {% if pedido.cliente.direccion %}
+      <div class="data-item">
+        <label>Dirección de entrega</label>
+        <p>{{ pedido.cliente.direccion }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Librízate — El Archivista Orgánico · © 2024 Todos los derechos reservados</p>
+    <p style="margin-top:4px">Este documento es el justificante de tu pedido. Consérvalo como comprobante.</p>
+  </div>
+
+</body>
+</html>

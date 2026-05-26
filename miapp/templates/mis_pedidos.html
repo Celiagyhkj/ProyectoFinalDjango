@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Librízate - Mis Pedidos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode:"class",
+    theme:{extend:{
+      colors:{
+        "on-primary":"#ffffff","on-tertiary-container":"#b2dce4","on-tertiary":"#ffffff","on-error":"#ffffff",
+        "secondary-container":"#eedcd2","tertiary-container":"#3a6269","primary-container":"#795437",
+        "secondary":"#695c54","surface-variant":"#e3e2df","surface-tint":"#7c5639","primary":"#5e3d22",
+        "surface-dim":"#dbdad6","on-primary-fixed":"#2e1501","surface-bright":"#faf9f5",
+        "surface-container":"#efeeea","on-error-container":"#93000a","surface-container-low":"#f4f4f0",
+        "outline-variant":"#d4c3b9","error":"#ba1a1a","on-primary-container":"#fdcba6","surface":"#faf9f5",
+        "secondary-fixed-dim":"#d4c3b9","on-background":"#1b1c1a","on-secondary-fixed":"#231a14",
+        "error-container":"#ffdad6","on-secondary":"#ffffff","outline":"#82746c",
+        "on-surface-variant":"#50453d","surface-container-lowest":"#ffffff","primary-fixed":"#ffdcc4",
+        "on-tertiary-fixed":"#001f24","primary-fixed-dim":"#eebd99","on-secondary-fixed-variant":"#50443d",
+        "surface-container-high":"#e9e8e4","on-secondary-container":"#6d6058",
+        "surface-container-highest":"#e3e2df","tertiary-fixed":"#c0eaf2","background":"#faf9f5",
+        "inverse-primary":"#eebd99","on-surface":"#1b1c1a","on-tertiary-fixed-variant":"#244d53",
+        "on-primary-fixed-variant":"#613f24","tertiary-fixed-dim":"#a4ced5","inverse-surface":"#2f312e",
+        "tertiary":"#214a51","secondary-fixed":"#f1dfd5","inverse-on-surface":"#f2f1ed"
+      },
+      borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},
+      fontFamily:{"headline":["Noto Serif"],"body":["Manrope"],"label":["Manrope"]}
+    }}
+  }
+</script>
+<style>
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
+  body{font-family:'Manrope',sans-serif}
+  h1,h2,h3{font-family:'Noto Serif',serif}
+  /* Badges */
+  .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 11px;border-radius:999px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .badge-pendiente{background:#ffdcc4;color:#613f24}
+  .badge-preparacion{background:#eedcd2;color:#695c54}
+  .badge-enviado{background:#c0eaf2;color:#244d53}
+  .badge-entregado{background:#d2eadd;color:#0d4a25}
+  .badge-cancelado{background:#ffdad6;color:#93000a}
+  /* Tabs */
+  .tab-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:999px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;border:1.5px solid transparent;background:transparent;color:#695c54;font-family:'Manrope',sans-serif;transition:all .15s;text-decoration:none;cursor:pointer}
+  .tab-pill.active{background:#5e3d22;color:#fff;border-color:#5e3d22}
+  .tab-pill:hover:not(.active){border-color:#d4c3b9;color:#5e3d22}
+  /* Tabla */
+  .tbl th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#82746c;background:#f4f4f0;border-bottom:1px solid #d4c3b9}
+  .tbl td{padding:13px 14px;border-bottom:1px solid #efeeea;font-size:13px;vertical-align:middle}
+  .tbl tbody tr{transition:background .1s}
+  .tbl tbody tr:hover{background:#f4f4f0}
+  .tbl tbody tr:last-child td{border-bottom:none}
+  /* Botones acción */
+  .act{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:7px;border:1px solid #d4c3b9;background:white;color:#82746c;cursor:pointer;transition:all .15s;text-decoration:none}
+  .act:hover{border-color:#5e3d22;color:#5e3d22;background:#ffdcc4}
+  .act.danger:hover{border-color:#ba1a1a;color:#ba1a1a;background:#ffdad6}
+  .act:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+  /* Select */
+  .est-sel{font-size:11px;border:1px solid #d4c3b9;border-radius:6px;padding:5px 8px;background:white;color:#50453d;cursor:pointer;font-family:'Manrope',sans-serif;font-weight:600}
+  .est-sel:focus{outline:none;border-color:#5e3d22}
+  /* Toast */
+  #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#5e3d22;color:white;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:600;display:none;z-index:9999;box-shadow:0 4px 16px rgba(94,61,34,.3);white-space:nowrap;font-family:'Manrope',sans-serif}
+  /* Stat cards */
+  .stat-c{background:white;border:1px solid #efeeea;border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px}
+  .stat-i{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+</style>
+</head>
+
+<body class="bg-surface text-on-surface">
+
+<!-- NAVBAR (tu diseño exacto) -->
+<header class="bg-[#faf9f5]/80 dark:bg-stone-900/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+  <div class="text-2xl font-bold tracking-tight text-[#5e3d22] font-['Noto_Serif']">Librízate</div>
+  <div class="hidden md:flex items-center gap-8 font-['Noto_Serif'] text-lg font-medium">
+    <a class="text-stone-500 hover:text-[#795437] transition-colors" href="/inicio/">Inicio</a>
+    <a class="text-stone-500 hover:text-[#795437] transition-colors" href="/catalogo/">Catálogo</a>
+    <a class="text-[#5e3d22] border-b-2 border-[#5e3d22] pb-1" href="/pedidos/">Mis Pedidos</a>
+  </div>
+  <div class="flex items-center gap-4">
+
+  {% if user.is_authenticated %}
+
+    <span class="text-sm text-secondary">
+      {{ user.username }}
+    </span>
+
+    <a href="/accounts/logout/"
+       class="bg-[#ba1a1a] text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition">
+      Cerrar sesión
+    </a>
+
+  {% else %}
+
+    <a href="/inicio_sesion/"
+       class="bg-primary text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition">
+      Iniciar sesión
+    </a>
+
+  {% endif %}
+
+  <button class="material-symbols-outlined text-[#5e3d22] text-2xl">
+    menu_book
+  </button>
+
+</div>
+</nav>
+<div class="bg-stone-200/20 h-[1px] w-full"></div>
+</header>
+
+<main class="max-w-7xl mx-auto px-8 py-12">
+
+  <!-- MENSAJES DJANGO -->
+  {% if messages %}
+  <div class="mb-6 space-y-2">
+    {% for msg in messages %}
+    <div class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium
+      {% if msg.tags == 'success' %}bg-green-50 text-green-800 border border-green-200
+      {% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+      <span class="material-symbols-outlined text-base">{% if msg.tags == 'success' %}check_circle{% else %}error{% endif %}</span>
+      {{ msg }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- CABECERA -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
+    <div>
+      <nav class="flex items-center gap-2 text-xs uppercase tracking-widest text-secondary mb-4 font-label">
+        <a class="hover:text-primary transition-colors" href="/inicio/">Inicio</a>
+        <span class="material-symbols-outlined text-[12px]">chevron_right</span>
+        <span class="text-primary font-bold">Mis Pedidos</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-bold text-primary tracking-tight">Mis Pedidos</h1>
+      <p class="text-secondary mt-2 text-lg">Gestiona todos tus pedidos desde aquí</p>
+    </div>
+    <div class="flex gap-3">
+      <!-- Exportar Excel -->
+      <a href="/pedidos/exportar/excel/"
+         class="flex items-center gap-2 bg-surface-container-high text-primary px-5 py-3 rounded-md hover:bg-surface-container-highest transition border border-outline-variant/30 text-sm font-semibold">
+        <span class="material-symbols-outlined text-base">table_chart</span>
+        Exportar Excel
+      </a>
+      <!-- Ir al catálogo -->
+      <a href="/catalogo/"
+         class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-md hover:bg-primary-container transition shadow-sm text-sm font-semibold">
+        <span class="material-symbols-outlined text-base">add</span>
+        Nuevo pedido
+      </a>
+    </div>
+  </div>
+
+  <!-- STATS REALES -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+    <div class="stat-c">
+      <div class="stat-i" style="background:#ffdcc4;color:#613f24">
+        <span class="material-symbols-outlined" style="font-size:20px">receipt_long</span>
+      </div>
+      <div>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#82746c;font-weight:700">Total</p>
+        <p style="font-size:24px;font-weight:800;color:#5e3d22;font-family:'Noto Serif',serif">{{ contadores.todos }}</p>
+      </div>
+    </div>
+    <div class="stat-c">
+      <div class="stat-i" style="background:#ffddb4;color:#5c421b">
+        <span class="material-symbols-outlined" style="font-size:20px">schedule</span>
+      </div>
+      <div>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#82746c;font-weight:700">Pendientes</p>
+        <p style="font-size:24px;font-weight:800;color:#5e3d22;font-family:'Noto Serif',serif">{{ contadores.pendiente }}</p>
+      </div>
+    </div>
+    <div class="stat-c">
+      <div class="stat-i" style="background:#c0eaf2;color:#244d53">
+        <span class="material-symbols-outlined" style="font-size:20px">local_shipping</span>
+      </div>
+      <div>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#82746c;font-weight:700">En tránsito</p>
+        <p style="font-size:24px;font-weight:800;color:#5e3d22;font-family:'Noto Serif',serif">{{ contadores.enviado }}</p>
+      </div>
+    </div>
+    <div class="stat-c">
+      <div class="stat-i" style="background:#d2eadd;color:#0d4a25">
+        <span class="material-symbols-outlined" style="font-size:20px">check_circle</span>
+      </div>
+      <div>
+        <p style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#82746c;font-weight:700">Entregados</p>
+        <p style="font-size:24px;font-weight:800;color:#5e3d22;font-family:'Noto Serif',serif">{{ contadores.entregado }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL PRINCIPAL -->
+  <div class="bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30 shadow-sm">
+
+    <!-- Buscador -->
+    <div class="flex items-center gap-3 px-6 py-4 border-b border-outline-variant/20">
+      <span class="material-symbols-outlined text-secondary text-xl">search</span>
+      <input id="searchInput" type="text" placeholder="Buscar por título o autor..."
+             class="flex-1 bg-transparent outline-none text-sm text-on-surface placeholder:text-stone-400"
+             oninput="filtrar()">
+      <span id="contLabel" class="text-xs text-secondary"></span>
+    </div>
+
+    <!-- Tabs de estado (links reales a Django) -->
+    <div class="flex flex-wrap gap-2 px-6 py-4 border-b border-outline-variant/20 bg-surface-container-low">
+      <a href="/pedidos/" class="tab-pill {% if not estado_filtro %}active{% endif %}">
+        Todos
+        <span style="background:rgba(0,0,0,.1);border-radius:999px;padding:1px 7px;font-size:10px">{{ contadores.todos }}</span>
+      </a>
+      {% for valor, etiqueta in estados %}
+      <a href="/pedidos/?estado={{ valor }}" class="tab-pill {% if estado_filtro == valor %}active{% endif %}">
+        {{ etiqueta }}
+        <span style="background:rgba(0,0,0,.1);border-radius:999px;padding:1px 7px;font-size:10px">
+          {% if valor == 'pendiente' %}{{ contadores.pendiente }}
+          {% elif valor == 'preparacion' %}{{ contadores.preparacion }}
+          {% elif valor == 'enviado' %}{{ contadores.enviado }}
+          {% elif valor == 'entregado' %}{{ contadores.entregado }}
+          {% elif valor == 'cancelado' %}{{ contadores.cancelado }}
+          {% endif %}
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- TABLA con pedidos reales -->
+    <div class="overflow-x-auto">
+      {% if pedidos %}
+      <table class="tbl w-full">
+        <thead>
+          <tr>
+            <th style="width:55px">#</th>
+            <th>Libro / Autor</th>
+            <th style="width:100px">Fecha</th>
+            <th style="width:120px">Estado</th>
+            <th style="width:160px">Cambiar estado</th>
+            <th style="width:110px">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyPedidos">
+          {% for pedido in pedidos %}
+          <tr data-titulo="{{ pedido.titulo|lower }}" data-autor="{{ pedido.autor|lower }}">
+
+            <!-- ID -->
+            <td>
+              <span style="font-weight:700;color:#5e3d22;font-size:13px;font-family:'Noto Serif',serif">#{{ pedido.id }}</span>
+            </td>
+
+            <!-- Libro -->
+            <td>
+              <div style="display:flex;align-items:center;gap:10px">
+                {% if pedido.imagen %}
+                <img src="{{ pedido.imagen }}" alt="{{ pedido.titulo }}"
+                     style="width:34px;height:44px;object-fit:cover;border-radius:4px;flex-shrink:0;box-shadow:0 2px 8px rgba(94,61,34,.2)">
+                {% else %}
+                <div style="width:34px;height:44px;border-radius:4px;background:#f4f4f0;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <span class="material-symbols-outlined" style="font-size:16px;color:#82746c">menu_book</span>
+                </div>
+                {% endif %}
+                <div style="min-width:0">
+                  <p style="font-weight:700;color:#1b1c1a;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px">{{ pedido.titulo }}</p>
+                  <p style="font-size:11px;color:#695c54;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px">{{ pedido.autor }}</p>
+                </div>
+              </div>
+            </td>
+
+            <!-- Fecha -->
+            <td style="color:#82746c;font-size:12px">{{ pedido.fecha|date:"d/m/Y" }}</td>
+
+            <!-- Badge estado -->
+            <td>
+              <span class="badge badge-{{ pedido.estado }}" id="badge-{{ pedido.id }}">
+                <span class="material-symbols-outlined" style="font-size:11px">{{ pedido.estado_icono }}</span>
+                {{ pedido.get_estado_display }}
+              </span>
+            </td>
+
+            <!-- Select cambiar estado (fetch sin recargar) -->
+            <td>
+              <select class="est-sel" data-id="{{ pedido.id }}" onchange="cambiarEstado({{ pedido.id }}, this.value)">
+                {% for valor, etiqueta in estados %}
+                <option value="{{ valor }}" {% if pedido.estado == valor %}selected{% endif %}>{{ etiqueta }}</option>
+                {% endfor %}
+              </select>
+            </td>
+
+            <!-- Acciones -->
+            <td>
+              <div style="display:flex;gap:5px;align-items:center">
+
+                <!-- PDF -->
+                <a href="/pedidos/{{ pedido.id }}/pdf/" class="act" title="Exportar PDF">
+                  <span class="material-symbols-outlined" style="font-size:15px">picture_as_pdf</span>
+                </a>
+
+                <!-- Cancelar -->
+                {% if pedido.estado != 'cancelado' and pedido.estado != 'entregado' %}
+                <button class="act danger" title="Cancelar pedido"
+                        onclick="cancelarPedido({{ pedido.id }}, '{{ pedido.titulo|escapejs }}')">
+                  <span class="material-symbols-outlined" style="font-size:15px">cancel</span>
+                </button>
+                {% else %}
+                <button class="act" disabled title="No cancelable">
+                  <span class="material-symbols-outlined" style="font-size:15px">cancel</span>
+                </button>
+                {% endif %}
+
+              </div>
+            </td>
+
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Sin resultados en búsqueda -->
+      <div id="sinRes" class="hidden py-16 text-center">
+        <span class="material-symbols-outlined text-5xl text-stone-300 mb-3 block">search_off</span>
+        <p class="text-sm font-bold text-secondary">Sin resultados para tu búsqueda</p>
+      </div>
+
+      {% else %}
+      <!-- Sin pedidos -->
+      <div class="flex flex-col items-center justify-center py-24 text-center">
+        <span class="material-symbols-outlined text-7xl text-stone-200 mb-5">history_edu</span>
+        <h3 class="text-2xl font-bold text-primary mb-2">
+          {% if estado_filtro %}Sin pedidos con este estado{% else %}Aún no tienes pedidos{% endif %}
+        </h3>
+        <p class="text-secondary text-sm mb-8 max-w-xs">
+          {% if estado_filtro %}Prueba con otro filtro.{% else %}Explora el catálogo y añade tu primer libro.{% endif %}
+        </p>
+        <a href="{% if estado_filtro %}/pedidos/{% else %}/catalogo/{% endif %}"
+           class="bg-primary text-on-primary px-8 py-3 rounded-md font-bold text-sm uppercase tracking-widest hover:bg-primary-container transition">
+          {% if estado_filtro %}Ver todos{% else %}Explorar catálogo{% endif %}
+        </a>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer (tu diseño exacto) -->
+<footer class="bg-[#faf9f5] dark:bg-stone-950 w-full py-12 mt-20 border-t border-stone-200 dark:border-stone-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto">
+  <p class="font-['Manrope'] text-xs text-stone-500 dark:text-stone-400 mb-4 md:mb-0">
+    © 2024 Librízate - El Archivista Orgánico. Todos los derechos reservados.
+  </p>
+  <div class="flex gap-8">
+    <a class="font-['Manrope'] text-xs text-stone-400 hover:text-[#5e3d22] transition-all hover:underline" href="#">Aviso Legal</a>
+    <a class="font-['Manrope'] text-xs text-stone-400 hover:text-[#5e3d22] transition-all hover:underline" href="#">Privacidad</a>
+    <a class="font-['Manrope'] text-xs text-stone-400 hover:text-[#5e3d22] transition-all hover:underline" href="#">Contacto</a>
+    <a class="font-['Manrope'] text-xs text-stone-400 hover:text-[#5e3d22] transition-all hover:underline" href="#">Términos</a>
+  </div>
+</div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+const CSRF = '{{ csrf_token }}';
+const ICONOS = {pendiente:'schedule',preparacion:'inventory_2',enviado:'local_shipping',entregado:'check_circle',cancelado:'cancel'};
+const LABELS = {pendiente:'Pendiente',preparacion:'En preparación',enviado:'Enviado',entregado:'Entregado',cancelado:'Cancelado'};
+
+/* ── Filtro en tiempo real ── */
+function filtrar() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filas = document.querySelectorAll('#tbodyPedidos tr');
+  let v = 0;
+  filas.forEach(tr => {
+    const ok = !q || (tr.dataset.titulo||'').includes(q) || (tr.dataset.autor||'').includes(q);
+    tr.style.display = ok ? '' : 'none';
+    if (ok) v++;
+  });
+  document.getElementById('contLabel').textContent = v + ' pedido' + (v !== 1 ? 's' : '');
+  const sr = document.getElementById('sinRes');
+  if (sr) sr.classList.toggle('hidden', v > 0);
+}
+
+/* ── Cambiar estado via fetch (sin recargar) ── */
+function cambiarEstado(id, estado) {
+  fetch('/pedidos/' + id + '/estado/', {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': CSRF,
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'estado=' + estado
+  })
+  .then(r => r.json())
+  .then(d => {
+    if (!d.ok) return;
+    const badge = document.getElementById('badge-' + id);
+    if (badge) {
+      badge.className = 'badge badge-' + estado;
+      badge.innerHTML = '<span class="material-symbols-outlined" style="font-size:11px">' + ICONOS[estado] + '</span> ' + LABELS[estado];
+    }
+    // Desactivar cancelar si procede
+    if (['cancelado','entregado'].includes(estado)) {
+      const fila = badge ? badge.closest('tr') : null;
+      if (fila) { const btn = fila.querySelector('.act.danger'); if (btn) btn.disabled = true; }
+    }
+    toast('Estado: ' + LABELS[estado]);
+  })
+  .catch(() => toast('Error al actualizar'));
+}
+
+/* ── Cancelar pedido via fetch ── */
+function cancelarPedido(id, titulo) {
+  if (!confirm('¿Cancelar el pedido "' + titulo + '"? Esta acción no se puede deshacer.')) return;
+  fetch('/pedidos/' + id + '/cancelar/', {
+    method: 'POST',
+    headers: { 'X-CSRFToken': CSRF, 'X-Requested-With': 'XMLHttpRequest' }
+  })
+  .then(r => r.json())
+  .then(d => {
+    if (!d.ok) return;
+    const badge = document.getElementById('badge-' + id);
+    if (badge) {
+      badge.className = 'badge badge-cancelado';
+      badge.innerHTML = '<span class="material-symbols-outlined" style="font-size:11px">cancel</span> Cancelado';
+      const fila = badge.closest('tr');
+      if (fila) {
+        const btn = fila.querySelector('.act.danger'); if (btn) btn.disabled = true;
+        const sel = fila.querySelector('.est-sel'); if (sel) sel.value = 'cancelado';
+      }
+    }
+    toast('"' + titulo + '" cancelado');
+  })
+  .catch(() => toast('Error al cancelar'));
+}
+
+/* ── Toast ── */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.display = 'block';
+  clearTimeout(t._t); t._t = setTimeout(() => t.style.display = 'none', 2800);
+}
+
+/* Contador inicial */
+document.addEventListener('DOMContentLoaded', () => {
+  const filas = document.querySelectorAll('#tbodyPedidos tr');
+  if (filas.length) document.getElementById('contLabel').textContent = filas.length + ' pedido' + (filas.length !== 1 ? 's' : '');
+});
+</script>
+
+</body>
+</html>

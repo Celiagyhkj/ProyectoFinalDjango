@@ -4,14 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
-  <!-- TAILWIND -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
   <script>
     tailwind.config = {
       darkMode: "class",
@@ -34,14 +29,16 @@
       },
     }
   </script>
-
   <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
-
-    .book-shadow {
-      box-shadow: 15px 15px 40px -10px rgba(94, 61, 34, 0.15);
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .book-shadow { box-shadow: 15px 15px 40px -10px rgba(94, 61, 34, 0.15); }
+    /* Toast */
+    #toast-msg {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #5e3d22; color: white; padding: 10px 22px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; display: none; z-index: 9999;
+      font-family: 'Manrope', sans-serif; white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(94,61,34,.3);
     }
   </style>
 </head>
@@ -52,41 +49,62 @@
   <nav class="bg-[#faf9f5]/80 backdrop-blur-md text-[#5e3d22] text-lg sticky top-0 z-50 border-b border-stone-200/20">
     <div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
       <div class="text-2xl font-bold">Librízate</div>
-
       <div class="hidden md:flex gap-8">
+        <!-- menú del catálogo no sabe si estás logueado o no.  -->
+        <!-- l enlace "Inicio" del navbar debe ir a /inicio_sin_sesion/ 
+        si no estás logueado, o a /inicio/ si sí lo estás:  -->
+        {% if user.is_authenticated %}
         <a href="/inicio/">Inicio</a>
-        <a href="/" class="border-b-2 border-primary">Catálogo</a>
-        <a href="/pedido/">Mis Pedidos</a>
-        <a href="/perfil/">Perfil</a>
-      </div>
+        {% else %}
+        <a href="/">Inicio</a>
+        {% endif %}
+        <a href="/catalogo/" class="border-b-2 border-primary">Catálogo</a>
+        <a href="/pedidos/">Mis Pedidos</a>
 
+        {% if user.is_authenticated %}
+          <a href="{% url 'logout' %}" class="text-xs font-bold text-red-600 hover:text-primary transition">
+            Cerrar sesión
+          </a>
+        {% else %}
+          <a href="/inicio_sesion/" class="text-xs font-bold text-secondary hover:text-primary transition">
+            Iniciar sesión
+          </a>
+        {% endif %}
+      </div>
       <button class="material-symbols-outlined">menu_book</button>
     </div>
   </nav>
 
+  <!-- MENSAJES DJANGO -->
+  {% if messages %}
+  <div class="max-w-7xl mx-auto px-8 pt-4 space-y-2">
+    {% for msg in messages %}
+    <div class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium
+      {% if msg.tags == 'success' %}bg-green-50 text-green-800 border border-green-200
+      {% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+      <span class="material-symbols-outlined text-base">{% if msg.tags == 'success' %}check_circle{% else %}error{% endif %}</span>
+      {{ msg }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <!-- MAIN -->
   <main class="max-w-7xl mx-auto px-8 py-12">
 
-    <!-- 🔥 UN SOLO FORM (BUSCADOR + FILTROS) -->
-    <form method="GET">
+    <!-- BUSCADOR + FILTROS -->
+    <form method="GET" action="/catalogo/">
 
-      <!-- BUSCADOR PROTAGONISTA -->
+      <!-- BUSCADOR -->
       <div class="flex justify-center mb-16">
         <div class="w-full max-w-3xl flex items-center bg-white rounded-full shadow-xl border border-stone-200 focus-within:ring-2 focus-within:ring-primary transition-all">
-
-          <span class="material-symbols-outlined text-secondary px-5 text-2xl">
-            search
-          </span>
-
+          <span class="material-symbols-outlined text-secondary px-5 text-2xl">search</span>
           <input type="text" name="q" placeholder="Busca tu libro..."
-            value="{{ request.GET.q }}"
+            value="{{ query }}"
             class="w-full py-5 text-lg outline-none text-primary placeholder:text-stone-400">
-
-          <button
-            class="bg-primary text-white px-8 py-4 m-2 rounded-full font-semibold hover:bg-[#795437] transition">
+          <button class="bg-primary text-white px-8 py-4 m-2 rounded-full font-semibold hover:bg-[#795437] transition">
             Buscar
           </button>
-
         </div>
       </div>
 
@@ -95,121 +113,147 @@
 
         <!-- SIDEBAR -->
         <aside class="w-full md:w-64 space-y-10">
-
           <h3 class="font-bold text-xl text-primary">Filtrar</h3>
 
-          <!-- GÉNERO -->
           <section>
             <p class="text-xs uppercase text-secondary mb-3">Género</p>
-
             <div class="space-y-2 text-sm">
-              <label>
-                <input type="radio" name="genre" value=""
-                  {% if not request.GET.genre %}checked{% endif %}> Todos
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="genre" value="" {% if not genre_activo %}checked{% endif %}> Todos
               </label>
-
-              <label>
-                <input type="radio" name="genre" value="fiction"
-                  {% if request.GET.genre == "fiction" %}checked{% endif %}> Ficción
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="genre" value="fiction" {% if genre_activo == "fiction" %}checked{% endif %}> Ficción
               </label>
-
-              <label>
-                <input type="radio" name="genre" value="history"
-                  {% if request.GET.genre == "history" %}checked{% endif %}> Historia
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="genre" value="history" {% if genre_activo == "history" %}checked{% endif %}> Historia
               </label>
-
-              <label>
-                <input type="radio" name="genre" value="classic"
-                  {% if request.GET.genre == "classic" %}checked{% endif %}> Clásicos
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="genre" value="classic" {% if genre_activo == "classic" %}checked{% endif %}> Clásicos
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="genre" value="science" {% if genre_activo == "science" %}checked{% endif %}> Ciencia
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="genre" value="poetry" {% if genre_activo == "poetry" %}checked{% endif %}> Poesía
               </label>
             </div>
           </section>
 
-          <button type="submit"
-            class="w-full bg-primary text-white py-2 rounded font-bold uppercase">
+          <button type="submit" class="w-full bg-primary text-white py-2 rounded font-bold uppercase">
             Aplicar filtros
           </button>
 
+          {% if genre_activo or query %}
+          <a href="/catalogo/" class="block text-center text-xs text-secondary hover:text-primary underline">Limpiar filtros</a>
+          {% endif %}
         </aside>
 
         <!-- CONTENIDO PRINCIPAL -->
         <section class="flex-1">
 
-          <header class="mb-10">
-            <h1 class="text-4xl font-bold text-primary">Catálogo de Obras</h1>
-            <p class="text-secondary mt-2">Explora la sabiduría de nuestros libros</p>
+          <header class="mb-10 flex items-end justify-between">
+            <div>
+              <h1 class="text-4xl font-bold text-primary">Catálogo de Obras</h1>
+              <p class="text-secondary mt-2">
+                {% if libros %}{{ libros|length }} obra{% if libros|length != 1 %}s{% endif %} encontrada{% if libros|length != 1 %}s{% endif %}{% else %}Explora la sabiduría de nuestros libros{% endif %}
+              </p>
+            </div>
+            {% if user.is_authenticated %}
+            <a href="/pedidos/" class="text-sm font-bold text-primary hover:underline flex items-center gap-1">
+              <span class="material-symbols-outlined text-base">receipt_long</span> Mis Pedidos
+            </a>
+            {% endif %}
           </header>
 
+          {% if libros %}
           <!-- GRID -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-
             {% for libro in libros %}
-            <article>
+            <article class="group">
 
               <div class="relative aspect-[3/4] bg-surface-container-low overflow-hidden rounded-lg">
-
                 {% if libro.imagen %}
-                <img src="{{ libro.imagen }}" class="w-full h-full object-cover book-shadow">
+                <img src="{{ libro.imagen }}" class="w-full h-full object-cover book-shadow group-hover:scale-105 transition-transform duration-500">
+                {% else %}
+                <div class="w-full h-full flex flex-col items-center justify-center gap-2 bg-surface-container">
+                  <span class="material-symbols-outlined text-5xl text-secondary/30">menu_book</span>
+                  <span class="text-xs text-secondary/40 text-center px-4">{{ libro.titulo }}</span>
+                </div>
                 {% endif %}
 
-                <div class="absolute inset-0 bg-primary/10 opacity-0 hover:opacity-100 flex items-center justify-center">
-                  <button class="bg-primary text-white px-4 py-2 text-xs uppercase">
-                    Ver detalles
-                  </button>
+                <!-- Overlay hover con botón añadir -->
+                <div class="absolute inset-0 bg-primary/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  {% if user.is_authenticated %}
+                  <form method="POST" action="/crear_pedido/">
+                    {% csrf_token %}
+                    <input type="hidden" name="titulo" value="{{ libro.titulo }}">
+                    <input type="hidden" name="autor"  value="{{ libro.autor }}">
+                    <input type="hidden" name="imagen" value="{{ libro.imagen }}">
+                    <button type="submit"
+                            class="bg-white text-primary px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wide shadow hover:bg-stone-100 transition flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+                      Añadir pedido
+                    </button>
+                  </form>
+                  {% else %}
+                  <a href="/inicio_sesion/"
+                     class="bg-white text-primary px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wide shadow hover:bg-stone-100 transition">
+                    Inicia sesión
+                  </a>
+                  {% endif %}
                 </div>
-
               </div>
 
               <h3 class="mt-3 font-bold text-primary">{{ libro.titulo }}</h3>
               <p class="text-sm text-secondary">{{ libro.autor }}</p>
 
+              <!-- Botón visible siempre (abajo de la tarjeta) -->
               <div class="mt-3 flex justify-between items-center">
-
                 <span>📚</span>
-
+                {% if user.is_authenticated %}
                 <form method="POST" action="/crear_pedido/">
                   {% csrf_token %}
                   <input type="hidden" name="titulo" value="{{ libro.titulo }}">
-                  <input type="hidden" name="autor" value="{{ libro.autor }}">
+                  <input type="hidden" name="autor"  value="{{ libro.autor }}">
                   <input type="hidden" name="imagen" value="{{ libro.imagen }}">
-
-                  <button class="text-primary text-xs font-bold uppercase flex items-center gap-1">
+                  <button type="submit" class="text-primary text-xs font-bold uppercase flex items-center gap-1 hover:text-[#795437] transition">
                     <span class="material-symbols-outlined">add_circle</span>
                     Añadir
                   </button>
                 </form>
-
+                {% else %}
+                <a href="/inicio_sesion/" class="text-primary text-xs font-bold uppercase flex items-center gap-1">
+                  <span class="material-symbols-outlined">login</span>
+                  Iniciar sesión
+                </a>
+                {% endif %}
               </div>
 
             </article>
             {% endfor %}
-
           </div>
 
-          <!-- PAGINACIÓN -->
-          <div class="mt-16 flex justify-center gap-4">
-            <button>‹</button>
-            <span class="font-bold">1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>...</span>
-            <span>12</span>
-            <button>›</button>
+          {% else %}
+          <div class="flex flex-col items-center justify-center py-24 text-center">
+            <span class="material-symbols-outlined text-6xl text-secondary/20 mb-4">search_off</span>
+            <h3 class="text-xl font-bold text-primary mb-2">Sin resultados</h3>
+            <p class="text-secondary text-sm">Prueba con otros términos de búsqueda.</p>
+            <a href="/catalogo/" class="mt-6 bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition">Ver todo el catálogo</a>
           </div>
+          {% endif %}
 
         </section>
-
       </div>
-
     </form>
-
   </main>
 
   <!-- FOOTER -->
   <footer class="mt-20 border-t py-10 text-center text-xs text-stone-500">
     <p>© 2024 Librízate</p>
-    <p class="italic mt-2">“Custodiando la palabra impresa”</p>
+    <p class="italic mt-2">"Custodiando la palabra impresa"</p>
   </footer>
+
+  <div id="toast-msg"></div>
 
 </body>
 </html>

@@ -1,284 +1,291 @@
 <!DOCTYPE html>
-
-<html class="light" lang="es"><head>
+<html class="light" lang="es">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-primary": "#ffffff",
-                    "on-tertiary-container": "#b2dce4",
-                    "on-tertiary": "#ffffff",
-                    "on-error": "#ffffff",
-                    "secondary-container": "#eedcd2",
-                    "tertiary-container": "#3a6269",
-                    "primary-container": "#795437",
-                    "secondary": "#695c54",
-                    "surface-variant": "#e3e2df",
-                    "surface-tint": "#7c5639",
-                    "primary": "#5e3d22",
-                    "surface-dim": "#dbdad6",
-                    "on-primary-fixed": "#2e1501",
-                    "surface-bright": "#faf9f5",
-                    "surface-container": "#efeeea",
-                    "on-error-container": "#93000a",
-                    "surface-container-low": "#f4f4f0",
-                    "outline-variant": "#d4c3b9",
-                    "error": "#ba1a1a",
-                    "on-primary-container": "#fdcba6",
-                    "surface": "#faf9f5",
-                    "secondary-fixed-dim": "#d4c3b9",
-                    "on-background": "#1b1c1a",
-                    "on-secondary-fixed": "#231a14",
-                    "error-container": "#ffdad6",
-                    "on-secondary": "#ffffff",
-                    "outline": "#82746c",
-                    "on-surface-variant": "#50453d",
-                    "surface-container-lowest": "#ffffff",
-                    "primary-fixed": "#ffdcc4",
-                    "on-tertiary-fixed": "#001f24",
-                    "primary-fixed-dim": "#eebd99",
-                    "on-secondary-fixed-variant": "#50443d",
-                    "surface-container-high": "#e9e8e4",
-                    "on-secondary-container": "#6d6058",
-                    "surface-container-highest": "#e3e2df",
-                    "tertiary-fixed": "#c0eaf2",
-                    "background": "#faf9f5",
-                    "inverse-primary": "#eebd99",
-                    "on-surface": "#1b1c1a",
-                    "on-tertiary-fixed-variant": "#244d53",
-                    "on-primary-fixed-variant": "#613f24",
-                    "tertiary-fixed-dim": "#a4ced5",
-                    "inverse-surface": "#2f312e",
-                    "tertiary": "#214a51",
-                    "secondary-fixed": "#f1dfd5",
-                    "inverse-on-surface": "#f2f1ed"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "headline": ["Noto Serif"],
-                    "body": ["Manrope"],
-                    "label": ["Manrope"]
-            }
-          },
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary": "#ffffff","on-tertiary-container": "#b2dce4","on-tertiary": "#ffffff","on-error": "#ffffff",
+          "secondary-container": "#eedcd2","tertiary-container": "#3a6269","primary-container": "#795437",
+          "secondary": "#695c54","surface-variant": "#e3e2df","surface-tint": "#7c5639","primary": "#5e3d22",
+          "surface-dim": "#dbdad6","on-primary-fixed": "#2e1501","surface-bright": "#faf9f5",
+          "surface-container": "#efeeea","on-error-container": "#93000a","surface-container-low": "#f4f4f0",
+          "outline-variant": "#d4c3b9","error": "#ba1a1a","on-primary-container": "#fdcba6","surface": "#faf9f5",
+          "secondary-fixed-dim": "#d4c3b9","on-background": "#1b1c1a","on-secondary-fixed": "#231a14",
+          "error-container": "#ffdad6","on-secondary": "#ffffff","outline": "#82746c",
+          "on-surface-variant": "#50453d","surface-container-lowest": "#ffffff","primary-fixed": "#ffdcc4",
+          "on-tertiary-fixed": "#001f24","primary-fixed-dim": "#eebd99","on-secondary-fixed-variant": "#50443d",
+          "surface-container-high": "#e9e8e4","on-secondary-container": "#6d6058",
+          "surface-container-highest": "#e3e2df","tertiary-fixed": "#c0eaf2","background": "#faf9f5",
+          "inverse-primary": "#eebd99","on-surface": "#1b1c1a","on-tertiary-fixed-variant": "#244d53",
+          "on-primary-fixed-variant": "#613f24","tertiary-fixed-dim": "#a4ced5","inverse-surface": "#2f312e",
+          "tertiary": "#214a51","secondary-fixed": "#f1dfd5","inverse-on-surface": "#f2f1ed"
         },
-      }
-    </script>
+        "borderRadius": {"DEFAULT": "0.125rem","lg": "0.25rem","xl": "0.5rem","full": "0.75rem"},
+        "fontFamily": {"headline": ["Noto Serif"],"body": ["Manrope"],"label": ["Manrope"]}
+      },
+    },
+  }
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .serif-title { font-family: 'Noto Serif', serif; }
-        .sans-body { font-family: 'Manrope', sans-serif; }
-        .glass-nav { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-    </style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .serif-title { font-family: 'Noto Serif', serif; }
+  .sans-body { font-family: 'Manrope', sans-serif; }
+</style>
 </head>
+
 <body class="bg-surface text-on-surface sans-body selection:bg-secondary-container selection:text-on-secondary-container">
+
 <!-- TopNavBar -->
 <header class="bg-[#faf9f5]/80 dark:bg-stone-900/80 backdrop-blur-md shadow-sm dark:shadow-none docked full-width top-0 z-50 sticky">
 <div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[#5e3d22] text-3xl" data-icon="menu_book">menu_book</span>
-<h1 class="text-2xl font-bold tracking-tight text-[#5e3d22] dark:text-[#d4c3b9] serif-title">Librízate</h1>
+  <div class="flex items-center gap-2">
+    <span class="material-symbols-outlined text-[#5e3d22] text-3xl">menu_book</span>
+    <h1 class="text-2xl font-bold tracking-tight text-[#5e3d22] serif-title">Librízate</h1>
+  </div>
+  <nav class="hidden md:flex items-center gap-8 font-['Noto_Serif'] text-lg font-medium">
+    <a class="text-[#5e3d22] border-b-2 border-[#5e3d22] pb-1" href="/inicio/">Inicio</a>
+    <a class="text-stone-500 hover:text-[#795437] transition-colors" href="/catalogo/">Catálogo</a>
+    <a class="text-stone-500 hover:text-[#795437] transition-colors" href="/pedidos/">Mis Pedidos</a>
+  </nav>
+  <div class="flex items-center gap-4">
+    <a href="/catalogo/" class="p-2 text-stone-500 hover:text-[#5e3d22] transition-all">
+      <span class="material-symbols-outlined">search</span>
+    </a>
+    <a href="/pedidos/" class="p-2 text-stone-500 hover:text-[#5e3d22] transition-all relative">
+      <span class="material-symbols-outlined">shopping_basket</span>
+      {% if num_pedidos > 0 %}
+      <span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">{{ num_pedidos }}</span>
+      {% endif %}
+    </a>
+<!-- BOTÓN PARA CERRAR SESIÓN SI ESTA INICIADA O INICIAR -->
+    {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}" class="text-xs font-bold text-red-600 hover:text-primary transition">
+        Cerrar sesión
+      </a>
+    {% else %}
+      <a href="/inicio_sesion/" class="text-xs font-bold text-secondary hover:text-primary transition">
+        Iniciar sesión
+      </a>
+    {% endif %}
+  </div>
 </div>
-<nav class="hidden md:flex items-center gap-8 font-['Noto_Serif'] text-lg font-medium">
-<a class="text-[#5e3d22] dark:text-white border-b-2 border-[#5e3d22] dark:border-[#d4c3b9] pb-1 duration-300 ease-in-out" href="/">Inicio</a>
-<a class="text-stone-500 dark:text-stone-400 hover:text-[#795437] transition-colors duration-300 ease-in-out" href="/catalogo/">Catálogo</a>
-<a class="text-stone-500 dark:text-stone-400 hover:text-[#795437] transition-colors duration-300 ease-in-out" href="/pedido/">Mis Pedidos</a>
-<a class="text-stone-500 dark:text-stone-400 hover:text-[#795437] transition-colors duration-300 ease-in-out" href="/perfil/">Perfil</a>
-</nav>
-<div class="flex items-center gap-4">
-<button class="p-2 text-stone-500 hover:text-[#5e3d22] transition-all">
-<span class="material-symbols-outlined" data-icon="search">search</span>
-</button>
-<button class="p-2 text-stone-500 hover:text-[#5e3d22] transition-all">
-<span class="material-symbols-outlined" data-icon="shopping_basket">shopping_basket</span>
-</button>
-</div>
-</div>
-<div class="bg-stone-200/20 dark:bg-stone-800/20 h-[1px] w-full"></div>
+<div class="bg-stone-200/20 h-[1px] w-full"></div>
 </header>
+
 <main class="max-w-7xl mx-auto px-8 pt-12 pb-24">
-<!-- Welcome Section -->
-<section class="mb-16">
-<div class="flex flex-col md:flex-row justify-between items-end gap-6">
-<div>
-<p class="font-label text-sm uppercase tracking-[0.2em] text-secondary mb-2">El Archivista Orgánico</p>
-<h2 class="serif-title text-5xl font-bold text-primary leading-tight">Bienvenido de nuevo, <span class="italic text-primary-container">{{ usuario.username }}</span>.</h2>
-</div>
-<div class="bg-surface-container-low p-6 rounded-lg flex items-center gap-4 min-w-[300px]">
-<div class="h-12 w-12 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
-</div>
-<div>
-<p class="text-xs text-secondary font-medium uppercase tracking-wider">Tu lectura actual</p>
-<p class="font-headline font-bold text-on-surface">Cien Años de Soledad</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Search Section -->
-<section class="mb-20">
-<div class="relative max-w-3xl">
-<label class="block text-sm font-medium text-secondary mb-3 ml-1 uppercase tracking-widest" for="book-search">Encuentra tu próxima historia</label>
-<div class="relative group">
-<input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant focus:border-primary focus:ring-0 py-6 px-12 text-xl font-headline transition-all placeholder:text-stone-300 placeholder:italic" id="book-search" placeholder="Busca por título, autor o género..." type="text"/>
-<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-primary transition-colors text-3xl" data-icon="search">search</span>
-<div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2">
-<button class="px-6 py-2 bg-primary text-on-primary text-sm font-bold rounded-md hover:bg-primary-container transition-colors shadow-md">Consultar</button>
-</div>
-</div>
-</div>
-</section>
-<!-- Main Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-<!-- Left: Active Orders (The Archive of Pedidos) -->
-<div class="lg:col-span-8">
-<div class="flex items-center justify-between mb-8">
-<h3 class="serif-title text-2xl font-bold text-primary flex items-center gap-3">
-<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
-                        Tus Pedidos Activos
-                    </h3>
-<a class="text-sm font-bold text-primary-container hover:underline decoration-2 underline-offset-4" href="#">Ver todo el archivo</a>
-</div>
-<div class="space-y-1">
-<!-- Order Item: Preparando -->
-<div class="bg-surface p-6 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-low transition-colors duration-300">
-<img class="w-24 h-32 object-cover shadow-xl rounded-sm transform group-hover:-rotate-2 transition-transform" data-alt="Old leather book cover with gold leaf detailing on a dark wooden background with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZADtimbGya1uVZHI5k2R-8UaXt3Qrj66t6NHcXHZWI-fElESgMRLkV87qZiIqKZ1VreF4DUGnJTTr5KCLDTfROoRl4a8KwgzzL6uIBdUwU6iXpIxGXdIIilZ1WCCC0VJOwD016zAq2FjuY48NwooExzmcD_1tW2eYvL2ouejPOef78MhkcpSFyyc5KMIBMxKYk5DXeLJctG6VZ5UBZXwc8cKDkpq5dcOG7-BjvwfcwPGxpDhrh4v9i_62gr7noVCr_T-x8MAHgho"/>
-<div class="flex-grow">
-<div class="flex items-center gap-2 mb-1">
-<span class="inline-block px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest rounded-sm">Preparando</span>
-<span class="text-xs text-stone-400">#LB-88291</span>
-</div>
-<h4 class="font-headline text-xl font-bold text-on-surface">La Sombra del Viento</h4>
-<p class="text-stone-500 text-sm">Carlos Ruiz Zafón</p>
-</div>
-<div class="text-right">
-<p class="text-xs text-stone-400 mb-1">Entrega estimada</p>
-<p class="font-bold text-primary">12 Oct, 2024</p>
-</div>
-</div>
-<!-- Order Item: Enviado -->
-<div class="bg-surface-container-low p-6 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-high transition-colors duration-300">
-<img class="w-24 h-32 object-cover shadow-xl rounded-sm transform group-hover:rotate-2 transition-transform" data-alt="Classic hardcover book laying on a velvet fabric with warm sepia tones and soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIrySZ-SeVD4snj1byG3F46sWDjs0L8gn6Zn6o4UpvQ0Wsp8v_5O_yqRbUtd6OJ53CDVq03rwGUELn7YISEZeuFnj9oT3SHmLA4ObkTmP66wQuZhrUCaTT_77MaxXh3IwZKJqmXLK040_N6LTErtOHBY2fK0a7RDTyNA7B97YqvrcIM5Uwh3e3mUb0QfCAluXtm9nLGZYIJ5dRgNlSjGLbzVc5lnU08zu3MUrN_Hm-HIPRQb470ZACG6W6-Pv-jstQnMUeAy6oiLg"/>
-<div class="flex-grow">
-<div class="flex items-center gap-2 mb-1">
-<span class="inline-block px-2 py-0.5 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold uppercase tracking-widest rounded-sm">Enviado</span>
-<span class="text-xs text-stone-400">#LB-88104</span>
-</div>
-<h4 class="font-headline text-xl font-bold text-on-surface">Crónica de una muerte anunciada</h4>
-<p class="text-stone-500 text-sm">Gabriel García Márquez</p>
-</div>
-<div class="text-right">
-<p class="text-xs text-stone-400 mb-1">Estado de transporte</p>
-<p class="font-bold text-tertiary">En camino (Madrid)</p>
-</div>
-</div>
-<!-- Order Item: Entregado -->
-<div class="bg-surface p-6 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-low transition-colors duration-300 opacity-70">
-<img class="w-24 h-32 object-cover shadow-xl rounded-sm transform group-hover:scale-105 transition-transform" data-alt="Collection of vintage books stacked asymmetrically on a rustic oak table in a cozy study room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHm6siliMu9YDOS1gN1KwI4jIvpVzcwck1hXj6_MgdRZ_sCslamTlakZXPDXXKGyiP6voxOuu7uCTFi26yh8zXurwB9UfDyWHEUm5OmeBjxRJn4tXRcUY4LyBIs9pglV4VL92sP9yU17dFyFiOG2K0HA_yG0xqGcq-xHn3ZeNDtFUWCC-lEt4iZ-FO2KBpnW0id_IhuGrwtnGfusQQIsQtoAE-e_RwAY7nC71-4y7sXSD73daiFMDiraIJN5WdiGZvHNr_I69o0fg"/>
-<div class="flex-grow">
-<div class="flex items-center gap-2 mb-1">
-<span class="inline-block px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-sm">Entregado</span>
-<span class="text-xs text-stone-400">#LB-87992</span>
-</div>
-<h4 class="font-headline text-xl font-bold text-on-surface">El Aleph</h4>
-<p class="text-stone-500 text-sm">Jorge Luis Borges</p>
-</div>
-<div class="text-right">
-<p class="text-xs text-stone-400 mb-1">Llegó el</p>
-<p class="font-bold text-stone-600">02 Oct, 2024</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Right: Recommended / Discovery (Bento Style) -->
-<div class="lg:col-span-4 space-y-8">
-<div class="bg-primary text-on-primary p-8 rounded-lg relative overflow-hidden group">
-<div class="relative z-10">
-<h3 class="serif-title text-2xl font-bold mb-4">La Recomendación del Gremio</h3>
-<p class="text-on-primary-container text-sm leading-relaxed mb-6">
-                            "Para aquellos que buscan perderse en los laberintos de la memoria y el tiempo."
-                        </p>
-<button class="bg-surface-container-lowest text-primary px-5 py-2.5 font-bold text-sm flex items-center gap-2 hover:bg-secondary-fixed-dim transition-all">
-                            Descubrir Obra <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
-</button>
-</div>
-<div class="absolute -right-4 -bottom-4 opacity-20 transform rotate-12 group-hover:rotate-6 transition-transform">
-<span class="material-symbols-outlined text-[160px]" data-icon="ink_pen">ink_pen</span>
-</div>
-</div>
-<div class="bg-surface-container-high p-8 rounded-lg">
-<h3 class="serif-title text-xl font-bold text-on-surface mb-4">Archivos Destacados</h3>
-<ul class="space-y-4">
-<li class="flex items-center gap-4 group cursor-pointer">
-<div class="w-12 h-16 bg-stone-200 overflow-hidden rounded-sm flex-shrink-0">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="Cover of a classic book with intricate golden patterns on a dark emerald background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMBfNCox8qSJpq4IGDONpP72DageQ02qAvzOMhigFTqAlp4HVxhNFuENTZ5pwwPNtNDmBNyqeFM0obtMqblGRsntODP0K1Y6XQus0zlpxIRPHdym2iyKTo_JPUCWxKRF0IYSybHJ7_XNJ_iEboljIAumWhhnje8mbj6PLVbD_uSM79-OhhSKb5_IZ-tBZ21PLsgehvozTtQxTAkvHGDa3SXn76dcAZZXcQpCXgWEZfocUeewQASMUiRTXzU7vfinAZmD9pPJPR8ks"/>
-</div>
-<div>
-<p class="text-sm font-bold text-primary leading-tight group-hover:text-primary-container">Don Quijote de la Mancha</p>
-<p class="text-xs text-stone-500">Miguel de Cervantes</p>
-</div>
-</li>
-<li class="flex items-center gap-4 group cursor-pointer">
-<div class="w-12 h-16 bg-stone-200 overflow-hidden rounded-sm flex-shrink-0">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" data-alt="Close-up of a weathered book page with elegant cursive handwriting and a dried flower" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4qC59BXoP-Z53ryyewzH9a1lIwJNANqjwOXkI47WwA-YnWItii0bc8pZDk9vo1bFKG_R3LcE1ra7Y2V9SK8--ZsZSR8Gzba7PA5Qv1E8jqQj22gGXMSrI5dptgcpAb9TbVn-hBg5rps56CCKGKDlgviKWwptK8OE0OMumhwbZBxXjy481o1LEYcjOgDA3wXevbotB2rIWweZ3qCkaY2JiNHbYmPUAir0a5RM1cpHMF0Vj2BItQHF-YE6_yhntJHeM9tXE1s5fqGc"/>
-</div>
-<div>
-<p class="text-sm font-bold text-primary leading-tight group-hover:text-primary-container">Rayuela</p>
-<p class="text-xs text-stone-500">Julio Cortázar</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
+
+  <!-- Welcome Section -->
+  <section class="mb-16">
+    <div class="flex flex-col md:flex-row justify-between items-end gap-6">
+      <div>
+        <p class="font-label text-sm uppercase tracking-[0.2em] text-secondary mb-2">El Archivista Orgánico</p>
+        <h2 class="serif-title text-5xl font-bold text-primary leading-tight">
+          Bienvenido de nuevo, <span class="italic text-primary-container">{{ usuario.username }}</span>.
+        </h2>
+      </div>
+      {% if ultimo_pedido %}
+      <div class="bg-surface-container-low p-6 rounded-lg flex items-center gap-4 min-w-[300px]">
+        <div class="h-12 w-12 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined">auto_stories</span>
+        </div>
+        <div>
+          <p class="text-xs text-secondary font-medium uppercase tracking-wider">Último pedido</p>
+          <p class="font-headline font-bold text-on-surface truncate max-w-[180px]">{{ ultimo_pedido.titulo }}</p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="mb-20">
+    <div class="relative max-w-3xl">
+      <label class="block text-sm font-medium text-secondary mb-3 ml-1 uppercase tracking-widest" for="book-search">
+        Encuentra tu próxima historia
+      </label>
+      <form method="GET" action="/catalogo/">
+        <div class="relative group">
+          <input class="w-full bg-surface-container-lowest border-b-2 border-outline-variant focus:border-primary focus:ring-0 py-6 px-12 text-xl font-headline transition-all placeholder:text-stone-300 placeholder:italic"
+                 id="book-search" name="q" placeholder="Busca por título, autor o género..." type="text"/>
+          <span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-stone-400 group-focus-within:text-primary transition-colors text-3xl">search</span>
+          <div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2">
+            <button type="submit" class="px-6 py-2 bg-primary text-on-primary text-sm font-bold rounded-md hover:bg-primary-container transition-colors shadow-md">
+              Consultar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Main Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+    <!-- Left: Pedidos Activos reales -->
+    <div class="lg:col-span-8">
+      <div class="flex items-center justify-between mb-8">
+        <h3 class="serif-title text-2xl font-bold text-primary flex items-center gap-3">
+          <span class="material-symbols-outlined">receipt_long</span>
+          Tus Pedidos Activos
+        </h3>
+        <a class="text-sm font-bold text-primary-container hover:underline decoration-2 underline-offset-4" href="/pedidos/">
+          Ver todo el archivo
+        </a>
+      </div>
+
+      <!-- Colores de badge por estado -->
+      {% if pedidos_activos %}
+      <div class="space-y-1">
+        {% for pedido in pedidos_activos %}
+
+        {% if pedido.estado == 'preparacion' %}
+        <div class="bg-surface p-6 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-low transition-colors duration-300">
+        {% elif pedido.estado == 'enviado' %}
+        <div class="bg-surface-container-low p-6 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-high transition-colors duration-300">
+        {% else %}
+        <div class="bg-surface p-6 flex flex-col md:flex-row items-center gap-6 group hover:bg-surface-container-low transition-colors duration-300 {% if pedido.estado == 'entregado' %}opacity-70{% endif %}">
+        {% endif %}
+
+          {% if pedido.imagen %}
+          <img class="w-24 h-32 object-cover shadow-xl rounded-sm transform group-hover:-rotate-2 transition-transform"
+               src="{{ pedido.imagen }}" alt="{{ pedido.titulo }}">
+          {% else %}
+          <div class="w-24 h-32 bg-surface-container rounded-sm flex items-center justify-center flex-shrink-0">
+            <span class="material-symbols-outlined text-3xl text-secondary/40">menu_book</span>
+          </div>
+          {% endif %}
+
+          <div class="flex-grow">
+            <div class="flex items-center gap-2 mb-1">
+              {% if pedido.estado == 'preparacion' %}
+              <span class="inline-block px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest rounded-sm">Preparando</span>
+              {% elif pedido.estado == 'enviado' %}
+              <span class="inline-block px-2 py-0.5 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold uppercase tracking-widest rounded-sm">Enviado</span>
+              {% elif pedido.estado == 'entregado' %}
+              <span class="inline-block px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-[10px] font-bold uppercase tracking-widest rounded-sm">Entregado</span>
+              {% elif pedido.estado == 'pendiente' %}
+              <span class="inline-block px-2 py-0.5 bg-primary-fixed text-on-primary-fixed text-[10px] font-bold uppercase tracking-widest rounded-sm">Pendiente</span>
+              {% else %}
+              <span class="inline-block px-2 py-0.5 bg-error-container text-on-error-container text-[10px] font-bold uppercase tracking-widest rounded-sm">Cancelado</span>
+              {% endif %}
+              <span class="text-xs text-stone-400">#{{ pedido.id }}</span>
+            </div>
+            <h4 class="font-headline text-xl font-bold text-on-surface">{{ pedido.titulo }}</h4>
+            <p class="text-stone-500 text-sm">{{ pedido.autor }}</p>
+          </div>
+
+          <div class="text-right">
+            <p class="text-xs text-stone-400 mb-1">Pedido el</p>
+            <p class="font-bold text-primary">{{ pedido.fecha|date:"d M, Y" }}</p>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      {% else %}
+      <!-- Sin pedidos: CTA al catálogo -->
+      <div class="bg-surface-container-low rounded-xl p-12 text-center">
+        <span class="material-symbols-outlined text-5xl text-secondary/30 mb-4 block">inbox</span>
+        <p class="font-bold text-primary mb-2">Aún no tienes pedidos activos</p>
+        <p class="text-sm text-secondary mb-6">Explora el catálogo y encuentra tu próxima lectura.</p>
+        <a href="/catalogo/" class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold hover:opacity-90 transition">
+          Explorar catálogo
+        </a>
+      </div>
+      {% endif %}
+
+    </div>
+
+    <!-- Right: Bento lateral (igual que tu original) -->
+    <div class="lg:col-span-4 space-y-8">
+      <div class="bg-primary text-on-primary p-8 rounded-lg relative overflow-hidden group">
+        <div class="relative z-10">
+          <h3 class="serif-title text-2xl font-bold mb-4">La Recomendación del Gremio</h3>
+          <p class="text-on-primary-container text-sm leading-relaxed mb-6">
+            "Para aquellos que buscan perderse en los laberintos de la memoria y el tiempo."
+          </p>
+          <a href="/catalogo/" class="bg-surface-container-lowest text-primary px-5 py-2.5 font-bold text-sm flex items-center gap-2 hover:bg-secondary-fixed-dim transition-all">
+            Descubrir Obra <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+        </div>
+        <div class="absolute -right-4 -bottom-4 opacity-20 transform rotate-12 group-hover:rotate-6 transition-transform">
+          <span class="material-symbols-outlined text-[160px]">ink_pen</span>
+        </div>
+      </div>
+
+      <!-- Stats reales del usuario -->
+      <div class="bg-surface-container-high p-8 rounded-lg">
+        <h3 class="serif-title text-xl font-bold text-on-surface mb-6">Tu Archivo</h3>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-secondary">Total pedidos</span>
+            <span class="font-bold text-primary text-lg">{{ contadores.todos }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-secondary">Pendientes</span>
+            <span class="font-bold text-primary">{{ contadores.pendiente }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-secondary">En camino</span>
+            <span class="font-bold text-tertiary">{{ contadores.enviado }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-secondary">Entregados</span>
+            <span class="font-bold text-stone-600">{{ contadores.entregado }}</span>
+          </div>
+          <div class="pt-3 border-t border-outline-variant/20">
+            <a href="/pedidos/" class="text-xs font-bold text-primary uppercase tracking-widest hover:underline">
+              Ver todos →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </main>
+
 <!-- Footer -->
-<footer class="bg-[#faf9f5] dark:bg-stone-950 w-full py-12 mt-20 border-t border-stone-200 dark:border-stone-800">
+<footer class="bg-[#faf9f5] dark:bg-stone-950 w-full py-12 mt-20 border-t border-stone-200">
 <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto">
-<div class="mb-6 md:mb-0">
-<p class="font-['Manrope'] text-xs text-stone-500 dark:text-stone-400">
-                    © 2024 Librízate - El Archivista Orgánico. Todos los derechos reservados.
-                </p>
-</div>
-<nav class="flex gap-8 font-['Manrope'] text-xs text-stone-500 dark:text-stone-400">
-<a class="text-stone-400 hover:text-[#5e3d22] hover:underline transition-all duration-300" href="#">Aviso Legal</a>
-<a class="text-stone-400 hover:text-[#5e3d22] hover:underline transition-all duration-300" href="#">Privacidad</a>
-<a class="text-stone-400 hover:text-[#5e3d22] hover:underline transition-all duration-300" href="#">Contacto</a>
-<a class="text-stone-400 hover:text-[#5e3d22] hover:underline transition-all duration-300" href="#">Términos</a>
-</nav>
+  <p class="font-['Manrope'] text-xs text-stone-500 mb-4 md:mb-0">© 2024 Librízate - El Archivista Orgánico.</p>
+  <nav class="flex gap-8 font-['Manrope'] text-xs text-stone-500">
+    <a class="hover:text-[#5e3d22] hover:underline transition-all" href="#">Aviso Legal</a>
+    <a class="hover:text-[#5e3d22] hover:underline transition-all" href="#">Privacidad</a>
+    <a class="hover:text-[#5e3d22] hover:underline transition-all" href="#">Contacto</a>
+    <a class="hover:text-[#5e3d22] hover:underline transition-all" href="#">Términos</a>
+  </nav>
 </div>
 </footer>
+
 <!-- Mobile Navigation -->
 <div class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-lowest border-t border-outline-variant px-6 py-4 flex justify-between items-center z-50">
-<a class="flex flex-col items-center gap-1 text-primary" href="#">
-<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
-<span class="text-[10px] font-bold uppercase tracking-tighter">Inicio</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
-<span class="material-symbols-outlined" data-icon="explore">explore</span>
-<span class="text-[10px] font-bold uppercase tracking-tighter">Explorar</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
-<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
-<span class="text-[10px] font-bold uppercase tracking-tighter">Pedidos</span>
-</a>
-<a class="flex flex-col items-center gap-1 text-stone-400" href="#">
-<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-<span class="text-[10px] font-bold uppercase tracking-tighter">Perfil</span>
-</a>
+  <a class="flex flex-col items-center gap-1 text-primary" href="/inicio/">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Inicio</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-stone-400" href="/catalogo/">
+    <span class="material-symbols-outlined">explore</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Explorar</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-stone-400" href="/pedidos/">
+    <span class="material-symbols-outlined">receipt_long</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Pedidos</span>
+  </a>
+  <a class="flex flex-col items-center gap-1 text-stone-400" href="/perfil/">
+    <span class="material-symbols-outlined">account_circle</span>
+    <span class="text-[10px] font-bold uppercase tracking-tighter">Perfil</span>
+  </a>
 </div>
-</body></html>
+
+</body>
+</html>

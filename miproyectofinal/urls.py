@@ -1,37 +1,31 @@
-"""
-URL configuration for miproyectofinal project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
-from django.contrib import admin
-from django.urls import path
-from miapp import views
 from django.urls import path, include
+from miapp import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # ── Páginas generales ──
+    path('',               views.inicio_sin_sesion, name='inicio_sin_sesion'),
+    path('inicio/',        views.inicio,            name='inicio'),
+    path('catalogo/',      views.catalogo,          name='catalogo'),
+    path('perfil/',        views.perfil,            name='perfil'),
+    path('gestor/',        views.gestor,            name='gestor'),
 
-    path('', views.inicio_sin_sesion, name='inicio_sin_sesion'),
-    path('inicio/', views.inicio, name='inicio'),
-    path('catalogo/', views.catalogo, name='catalogo'),
-    path('pedido/', views.detalle_pedido, name='detalle_pedido'),
-    path('perfil/', views.perfil, name='perfil'),
-    path('gestor/', views.gestor, name='gestor'),
-    path('registro/', views.registro, name="registro"),
-    path('inicio_sesion/', views.inicio_sesion, name='inicio_sesion'),
-    path("add_carrito/", views.add_carrito, name="crear_pedido"),
-    path('accounts/', include('allauth.urls')),
+    # ── Autenticación propia ──
+    path('inicio_sesion/', views.inicio_sesion,     name='inicio_sesion'),
+    path('registro/',      views.registro,          name='registro'),
+    path('logout/', views.cerrar_sesion, name='logout'),
 
+    # ── OAuth2 Google (django-allauth) ──
+    path('accounts/',      include('allauth.urls')),
+
+    # ── Pedidos ──
+    path('crear_pedido/',                          views.crear_pedido,          name='crear_pedido'),
+    path('pedidos/',                               views.mis_pedidos,           name='mis_pedidos'),
+    path('pedidos/<int:pedido_id>/estado/',        views.cambiar_estado_pedido, name='cambiar_estado_pedido'),
+    path('pedidos/<int:pedido_id>/cancelar/',      views.cancelar_pedido,       name='cancelar_pedido'),
+    path('pedidos/<int:pedido_id>/pdf/',           views.exportar_pdf,          name='exportar_pdf'),
+    path('pedidos/exportar/excel/',                views.exportar_excel,        name='exportar_excel'),
+
+    # ── Legacy ──
+    path('add_carrito/',   views.add_carrito,       name='add_carrito'),
+    path('pedido/',        views.detalle_pedido,    name='detalle_pedido'),
 ]

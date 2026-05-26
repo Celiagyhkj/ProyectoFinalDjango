@@ -12,8 +12,7 @@
 
       <a href="/inicio/" class="hover:text-primary transition">Inicio</a>
       <a href="/catalogo/" class="hover:text-primary transition">Catálogo</a>
-      <a href="/pedido/" class="hover:text-primary transition">Pedidos</a>
-      <a href="/perfil/" class="hover:text-primary transition">Perfil</a>
+      <a href="/pedidos/" class="hover:text-primary transition">Pedidos</a>
 
       {% if user.is_authenticated %}
         
@@ -21,6 +20,33 @@
         <span class="text-sm text-on-surface-variant">
           {{ user.username }}
         </span>
+
+        <!-- LOGOUT -->
+        <a href="/accounts/logout/" 
+           class="bg-error text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition">
+          Cerrar sesión
+        </a>
+
+      {% else %}
+
+        <!-- LOGIN -->
+        <nav class="bg-surface border-b border-outline-variant sticky top-0 z-50">
+
+  <div class="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+
+    <!-- LOGO -->
+    <div class="text-2xl font-headline text-primary">
+      Librízate
+    </div>
+
+    <!-- MENÚ -->
+    <div class="hidden md:flex items-center gap-8 text-on-surface font-medium">
+
+      <a href="/inicio/" class="hover:text-primary transition">Inicio</a>
+      <a href="/catalogo/" class="hover:text-primary transition">Catálogo</a>
+      <a href="/pedidos/" class="hover:text-primary transition">Pedidos</a>
+
+      {% if user.is_authenticated %}
 
         <!-- LOGOUT -->
         <a href="/accounts/logout/" 
