@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 LOGIN_REDIRECT_URL = '/'
@@ -21,13 +20,9 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_URL = '/inicio_sesion/'
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-ui1%$5y&vjqivyghd^j3+^i=3a!wsif)qed-%#)il8_y#71o_j"
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 LOGIN_REDIRECT_URL = "/inicio/"
@@ -35,7 +30,6 @@ LOGIN_REDIRECT_URL = "/inicio/"
 ALLOWED_HOSTS = []
 
 
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -87,9 +81,6 @@ STATIC_URL = 'static/'
 WSGI_APPLICATION = "miproyectofinal.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -98,8 +89,6 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -117,9 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/6.0/topics/i18n/
-
 LANGUAGE_CODE = "es"
 
 TIME_ZONE = "UTC"
@@ -128,9 +114,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",

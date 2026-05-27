@@ -90,7 +90,7 @@ def gestor(request):
 
 
 # ─────────────────────────────────────────
-# AUTENTICACIÓN
+# AUTENTICATIÓN
 # ─────────────────────────────────────────
 
 def inicio_sesion(request):
@@ -132,7 +132,7 @@ def registro(request):
 
 
 # ─────────────────────────────────────────
-# CATÁLOGO — Open Library API
+# CATÁLOGO — API
 # ─────────────────────────────────────────
 
 def catalogo(request):
@@ -376,7 +376,7 @@ def exportar_pdf(request, pedido_id):
 
 
 # ─────────────────────────────────────────
-# LEGACY
+# DETALLES
 # ─────────────────────────────────────────
 
 def add_carrito(request):
