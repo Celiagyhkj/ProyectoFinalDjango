@@ -15,6 +15,7 @@ urlpatterns = [
     path('inicio_sesion/', views.inicio_sesion, name='inicio_sesion'),
     path('registro/', views.registro, name='registro'),
     path('logout/', views.cerrar_sesion, name='logout'),
+    path('logout/', views.cerrar_sesion, name='cerrar_sesion'),
 
     path('crear_pedido/', views.crear_pedido, name='crear_pedido'),
     path('pedidos/', views.mis_pedidos, name='mis_pedidos'),
